@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:newp/module_select/module_select.dart';
+import 'package:newp/utils/utils.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  constants = Constants();
+
+  await constants.init();
+
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constrains) {
+        constants.screenHeight = constrains.maxHeight;
+        constants.screenWidth = constrains.maxWidth;
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'AbleLyf',
+          theme: ThemeData(
+            appBarTheme: AppBarTheme(
+              color: constants.themeColor,
+              titleTextStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              iconTheme: IconThemeData(
+                color: Colors.white,
+              ),
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(
+                  Colors.white,
+                ),
+              ),
+            ),
+            scaffoldBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            useMaterial3: true,
+          ),
+          home: const ModuleSelect(),
+        );
+      },
+    );
+  }
+}
+
+extension ScreenUtil on num {
+  double get sh => constants.screenHeight * this;
+  double get sw => constants.screenWidth * this;
+}
