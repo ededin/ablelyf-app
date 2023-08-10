@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../learn/view/learn.dart';
+import '../learn/view/learn_screen.dart';
 // import '../profile/profile.dart';
 
 class DashboardBottom extends StatefulWidget {

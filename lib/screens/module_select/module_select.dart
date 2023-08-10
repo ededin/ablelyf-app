@@ -1,14 +1,4 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:newp/buy/buy.dart';
-import 'package:newp/cure/cure.dart';
-import 'package:newp/express/express.dart';
-import 'package:newp/learn/view/learn.dart';
-import 'package:newp/main.dart';
-import 'package:newp/see/see.dart';
-import 'package:newp/social/social.dart';
-import 'package:newp/utils/utils.dart';
-import '../talk/talk.dart';
+import '../../ablelyf.dart';
 
 class ModuleSelect extends StatelessWidget {
   const ModuleSelect({super.key});
@@ -111,8 +101,11 @@ class ModuleSelect extends StatelessWidget {
                   ),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const AbletoLearn()));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const AbletoLearn(),
+                      ),
+                    );
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(

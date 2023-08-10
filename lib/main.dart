@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:newp/module_select/module_select.dart';
-import 'package:newp/utils/utils.dart';
+import 'ablelyf.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
