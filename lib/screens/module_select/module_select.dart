@@ -106,7 +106,7 @@ class ModuleSelect extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const AbleToSocial(),
+                        builder: (context) => const SocialScreen(),
                       ),
                     );
                   },
