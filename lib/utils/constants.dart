@@ -4,8 +4,8 @@ class Constants {
   double screenHeight = 0;
   double screenWidth = 0;
 
-  Color themeColor = const Color(0xFF114FFF);
-  Color secondary = const Color(0xff7998ff);
+  Color themeColor = Colors.black;
+  Color secondary = Colors.black12;
   Color bg = const Color(0xffF2F5FF);
 
   List<String> alphabet = List.generate(

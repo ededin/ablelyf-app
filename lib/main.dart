@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'AbleLyf',
           theme: ThemeData(
+            primaryColor: constants.themeColor,
             appBarTheme: AppBarTheme(
               color: constants.themeColor,
               titleTextStyle: TextStyle(
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             scaffoldBackgroundColor: Colors.white,
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+            colorScheme: ColorScheme.fromSeed(seedColor: constants.themeColor),
             useMaterial3: true,
           ),
           home: const ModuleSelect(),
