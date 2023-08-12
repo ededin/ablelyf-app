@@ -64,7 +64,7 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
                 children: [
                   CircleAvatar(
                     radius: 0.1.sw,
-                    backgroundColor: constants.secondary,
+                    backgroundColor: constants.themeColor2,
                     backgroundImage: AssetImage(widget.image),
                   ),
                   Padding(
@@ -362,7 +362,7 @@ Widget timeListItem({onClick, var data, index, selectPosition}) {
         radius: 10.0,
         color: selectPosition == index
             ? constants.themeColor
-            : constants.secondary,
+            : constants.themeColor2,
       ),
       alignment: Alignment.center,
       child: customText(

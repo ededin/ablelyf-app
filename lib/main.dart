@@ -19,26 +19,36 @@ class MyApp extends StatelessWidget {
       builder: (context, constrains) {
         constants.screenHeight = constrains.maxHeight;
         constants.screenWidth = constrains.maxWidth;
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'AbleLyf',
           theme: ThemeData(
             primaryColor: constants.themeColor,
             appBarTheme: AppBarTheme(
               color: constants.themeColor,
-              titleTextStyle: TextStyle(
+              titleTextStyle: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: Colors.white,
               ),
             ),
+            radioTheme: RadioThemeData(
+              fillColor: MaterialStatePropertyAll(constants.themeColor),
+              overlayColor: MaterialStatePropertyAll(constants.themeColor),
+            ),
             elevatedButtonTheme: ElevatedButtonThemeData(
-              style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(
-                  Colors.white,
+              style: ButtonStyle(
+                elevation: const MaterialStatePropertyAll(0),
+                shadowColor: const MaterialStatePropertyAll(Colors.transparent),
+                backgroundColor: MaterialStatePropertyAll(constants.themeColor),
+                foregroundColor: MaterialStatePropertyAll(constants.secondary),
+                shape: MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
                 ),
               ),
             ),

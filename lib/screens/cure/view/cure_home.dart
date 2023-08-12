@@ -110,7 +110,7 @@ class CureHome extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: constants.secondary,
+                          color: constants.themeColor2,
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Padding(
@@ -125,7 +125,7 @@ class CureHome extends StatelessWidget {
                         '\nPhysical',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: constants.secondary.withOpacity(0.5),
+                          color: constants.themeColor2.withOpacity(0.5),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -163,7 +163,7 @@ class CureHome extends StatelessWidget {
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: constants.secondary,
+                          color: constants.themeColor2,
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Padding(
@@ -178,7 +178,7 @@ class CureHome extends StatelessWidget {
                         '\nTherapy',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: constants.secondary.withOpacity(0.5),
+                          color: constants.themeColor2.withOpacity(0.5),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -222,7 +222,7 @@ class CureHome extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 0.1.sw,
-                        backgroundColor: constants.secondary,
+                        backgroundColor: constants.themeColor2,
                         backgroundImage:
                             AssetImage('assets/images/cure/doctor$i.png'),
                       ),
