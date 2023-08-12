@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       builder: (context, constrains) {
         constants.screenHeight = constrains.maxHeight;
         constants.screenWidth = constrains.maxWidth;
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'AbleLyf',
           theme: ThemeData(
