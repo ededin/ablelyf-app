@@ -1,5 +1,3 @@
-import 'package:newp/screens/talk/view/find_screen.dart';
-
 import '../../../ablelyf.dart';
 
 class TalkWelcomeScreen extends StatefulWidget {
@@ -79,7 +77,7 @@ class _TalkWelcomeScreenState extends State<TalkWelcomeScreen> {
                 alignment: Alignment.centerRight,
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(() => const TalkFindScreen());
+                    Get.to(() => const TalkCameraScreen());
                   },
                   child: const Text(
                     "Get Started",

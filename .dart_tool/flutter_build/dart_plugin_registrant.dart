@@ -22,99 +22,131 @@ import 'package:shared_preferences_windows/shared_preferences_windows.dart';
 
 @pragma('vm:entry-point')
 class _PluginRegistrant {
+
   @pragma('vm:entry-point')
   static void register() {
     if (Platform.isAndroid) {
       try {
         PathProviderAndroid.registerWith();
       } catch (err) {
-        print('`path_provider_android` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`path_provider_android` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SharedPreferencesAndroid.registerWith();
       } catch (err) {
-        print('`shared_preferences_android` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`shared_preferences_android` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SqflitePlugin.registerWith();
       } catch (err) {
-        print('`sqflite` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`sqflite` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
+
     } else if (Platform.isIOS) {
       try {
         PathProviderFoundation.registerWith();
       } catch (err) {
-        print('`path_provider_foundation` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`path_provider_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SharedPreferencesFoundation.registerWith();
       } catch (err) {
-        print('`shared_preferences_foundation` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`shared_preferences_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SqflitePlugin.registerWith();
       } catch (err) {
-        print('`sqflite` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`sqflite` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
+
     } else if (Platform.isLinux) {
       try {
         PathProviderLinux.registerWith();
       } catch (err) {
-        print('`path_provider_linux` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`path_provider_linux` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SharedPreferencesLinux.registerWith();
       } catch (err) {
-        print('`shared_preferences_linux` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`shared_preferences_linux` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
+
     } else if (Platform.isMacOS) {
       try {
         PathProviderFoundation.registerWith();
       } catch (err) {
-        print('`path_provider_foundation` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`path_provider_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SharedPreferencesFoundation.registerWith();
       } catch (err) {
-        print('`shared_preferences_foundation` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`shared_preferences_foundation` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SqflitePlugin.registerWith();
       } catch (err) {
-        print('`sqflite` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`sqflite` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
+
     } else if (Platform.isWindows) {
       try {
         PathProviderWindows.registerWith();
       } catch (err) {
-        print('`path_provider_windows` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`path_provider_windows` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
 
       try {
         SharedPreferencesWindows.registerWith();
       } catch (err) {
-        print('`shared_preferences_windows` threw an error: $err. '
-            'The app may not function as expected until you remove this plugin from pubspec.yaml');
+        print(
+          '`shared_preferences_windows` threw an error: $err. '
+          'The app may not function as expected until you remove this plugin from pubspec.yaml'
+        );
       }
+
     }
   }
 }
