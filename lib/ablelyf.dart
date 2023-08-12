@@ -7,3 +7,4 @@ export 'screens/screens.dart';
 export 'package:carousel_slider/carousel_slider.dart';
 export 'package:horizontal_calendar/horizontal_calendar.dart';
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:data_table_2/data_table_2.dart';

@@ -39,6 +39,7 @@ dependencies:
   carousel_slider: ^4.2.1
   horizontal_calendar: ^1.1.2
   cached_network_image: ^3.2.3
+  data_table_2: ^2.5.3
 
 dev_dependencies:
   flutter_test:
