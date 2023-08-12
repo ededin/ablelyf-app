@@ -1,3 +1,5 @@
+import 'package:newp/screens/see/view/see_camera_page.dart';
+
 import '../../../ablelyf.dart';
 
 class AbleToSee extends StatefulWidget {
@@ -66,7 +68,8 @@ class _AbleToSeeState extends State<AbleToSee> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(const AbleSeeCreateAccount());
+                  Get.to(() => const SeeCameraPage());
+                  // Get.to(const AbleSeeCreateAccount());
                 },
                 child: Container(
                     padding: const EdgeInsets.symmetric(

@@ -52,6 +52,11 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
+            progressIndicatorTheme:
+                ProgressIndicatorThemeData(color: constants.themeColor),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+                backgroundColor: constants.secondary,
+                foregroundColor: constants.themeColor),
             scaffoldBackgroundColor: Colors.white,
             colorScheme: ColorScheme.fromSeed(seedColor: constants.themeColor),
             useMaterial3: true,
