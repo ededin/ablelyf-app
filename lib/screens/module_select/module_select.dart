@@ -55,7 +55,7 @@ class ModuleSelect extends StatelessWidget {
 
                         case 5:
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const AbleToSocial()));
+                              builder: (context) => const SocialScreen()));
                           break;
                       }
                     },
