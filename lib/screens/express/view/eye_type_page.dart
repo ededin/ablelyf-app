@@ -180,16 +180,21 @@ class _ExpressTabPageviewState extends State<ExpressTabPageview> {
             const SizedBox(
               width: 100,
             ),
-            Container(
-                width: 50,
-                height: 50,
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(bottom: 50),
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(Icons.add)),
+            InkWell(
+              onTap: () {
+                Get.to(const ChooseSituationPage());
+              },
+              child: Container(
+                  width: 50,
+                  height: 50,
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(bottom: 50),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.add)),
+            ),
           ],
         ),
       ],
