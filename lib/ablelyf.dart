@@ -9,3 +9,4 @@ export 'package:horizontal_calendar/horizontal_calendar.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:data_table_2/data_table_2.dart';
 export 'package:firebase_crashlytics/firebase_crashlytics.dart';
+export 'package:firebase_core/firebase_core.dart';

@@ -1,13 +1,24 @@
+import 'dart:async';
+
 import 'ablelyf.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  constants = Constants();
+    constants = Constants();
 
-  await constants.init();
+    await constants.init();
 
-  runApp(const MyApp());
+    await Firebase.initializeApp();
+
+    // Pass all uncaught errors from the framework to Crashlytics.
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
+    runApp(const MyApp());
+  }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
 }
 
 class MyApp extends StatelessWidget {
