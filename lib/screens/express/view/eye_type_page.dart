@@ -32,7 +32,7 @@ class _EyeTypePageState extends State<EyeTypePage>
               controller: serachController,
               decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
-                  hintText: 'Type hera to search',
+                  hintText: 'Type here to search',
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10)),
                   border: OutlineInputBorder(
@@ -48,7 +48,7 @@ class _EyeTypePageState extends State<EyeTypePage>
                     TextStyle(color: constants.lightgrey, fontSize: 13),
                 tabs: const [
                   Tab(text: 'Text'),
-                  Tab(text: 'voice'),
+                  Tab(text: 'Voice'),
                   Tab(text: 'Eye-Tracking')
                 ]),
             Expanded(
