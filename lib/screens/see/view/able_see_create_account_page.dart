@@ -8,6 +8,13 @@ class AbleSeeCreateAccount extends StatefulWidget {
 }
 
 class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
+  LoginControlller loginControlller = Get.put(LoginControlller());
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController fullnameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,30 +99,35 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
                       ],
                     ),
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                           hintText: 'Email',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     TextField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                           hintText: 'Password',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     TextField(
+                      controller: nameController,
                       decoration: InputDecoration(
                           hintText: 'Name',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     TextField(
+                      controller: fullnameController,
                       decoration: InputDecoration(
                           hintText: 'Full Name',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     TextField(
+                      controller: addressController,
                       decoration: InputDecoration(
                           hintText: 'Address',
                           border: OutlineInputBorder(
@@ -123,7 +135,14 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(const AbleSeeWelcomePage());
+                        loginControlller.createEmailAccount(
+                          email:emailController.text,
+                          password:passwordController.text,
+                          name:nameController.text,
+                          fullname:fullnameController.text,
+                          address:addressController.text,
+                        );
+                        // Get.to(const LoginPage());
                       },
                       child: Container(
                         width: 1.sw,
