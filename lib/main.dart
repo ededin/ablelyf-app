@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'ablelyf.dart';
+import 'firebase_options.dart';
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
@@ -10,7 +11,7 @@ void main() async {
 
     await constants.init();
 
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
 
     // Pass all uncaught errors from the framework to Crashlytics.
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
