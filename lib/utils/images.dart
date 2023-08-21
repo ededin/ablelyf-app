@@ -5,6 +5,8 @@ class Images {
   static const String sleepy = 'assets/images/sleepy.png';
   static const String poo = 'assets/images/poo.png';
   static const String quite = 'assets/images/quite.png';
+  static const String talk1 = 'assets/images/talk1.png';
+  static const String talk2 = 'assets/images/talk2.png';
 }
 
 class ModulesImages {

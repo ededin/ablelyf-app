@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-
-class AbleToSee extends StatefulWidget {
-  const AbleToSee({Key? key}) : super(key: key);
-
-  @override
-  _AbleToSeeState createState() => _AbleToSeeState();
-}
-
-class _AbleToSeeState extends State<AbleToSee> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-}
+export 'view/view.dart';
+export 'api/api.dart';
+export 'controller/controller.dart';
+export 'modal/modal.dart';

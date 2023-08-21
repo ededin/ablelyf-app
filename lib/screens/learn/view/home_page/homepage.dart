@@ -82,9 +82,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                   SizedBox(
                     width: 0.60.sw,
-                    child: const LinearProgressIndicator(
-                      backgroundColor: Colors.black,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    child: LinearProgressIndicator(
+                      backgroundColor: constants.themeColor2,
+                      value: 0.6,
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(constants.themeColor),
                     ),
                   )
                 ],

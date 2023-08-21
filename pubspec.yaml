@@ -36,8 +36,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.1.2
   get: ^4.6.5
-  firebase_core: ^2.13.0
-  cloud_firestore: ^4.7.1
+  carousel_slider: ^4.2.1
+  horizontal_calendar: ^1.1.2
+  cached_network_image: ^3.2.3
+  data_table_2: ^2.5.3
+  firebase_auth: ^4.7.3
+  firebase_core: ^2.15.1
+  firebase_crashlytics: ^3.3.4
 
 dev_dependencies:
   flutter_test:

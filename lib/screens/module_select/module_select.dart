@@ -11,8 +11,8 @@ class ModuleSelect extends StatelessWidget {
       Pharses(message: "Able to See", image: ModulesImages.see),
       Pharses(message: "Able to Buy", image: ModulesImages.buy),
       Pharses(message: "Able to Cure", image: ModulesImages.cure),
-      Pharses(message: "Able to Social", image: ModulesImages.social),
       Pharses(message: "Able to Learn", image: ModulesImages.learn),
+      Pharses(message: "Able To Socialize", image: ModulesImages.social),
     ];
     return Scaffold(
       backgroundColor: const Color(0xffF2F5FF),
@@ -55,7 +55,7 @@ class ModuleSelect extends StatelessWidget {
 
                         case 5:
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const SocialScreen()));
+                              builder: (context) => const AbletoLearn()));
                           break;
                       }
                     },
@@ -65,10 +65,11 @@ class ModuleSelect extends StatelessWidget {
                       width: 0.4.sw,
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
@@ -79,20 +80,22 @@ class ModuleSelect extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, top: 8),
-                            child: Text(modules[i]
-                                .message
-                                .split(' ')
-                                .sublist(0, 2)
-                                .join(' ')),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(
-                              modules[i].message.split(' ').last,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(modules[i]
+                                    .message
+                                    .split(' ')
+                                    .sublist(0, 2)
+                                    .join(' ')),
+                                Text(
+                                  ' ${modules[i].message.split(' ').last}',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -103,7 +106,7 @@ class ModuleSelect extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const AbletoLearn(),
+                        builder: (context) => const SocialScreen(),
                       ),
                     );
                   },
@@ -119,9 +122,10 @@ class ModuleSelect extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          ModulesImages.learn,
+                          modules[6].image,
                           height: 0.22.sw,
                         ),
                         Column(
@@ -129,20 +133,21 @@ class ModuleSelect extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 10, top: 8),
-                              child: Text(modules[6]
-                                  .message
-                                  .split(' ')
-                                  .sublist(0, 2)
-                                  .join(' ')),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Text(
-                                modules[6].message.split(' ').last,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                ),
+                              child: Row(
+                                children: [
+                                  Text(modules[6]
+                                      .message
+                                      .split(' ')
+                                      .sublist(0, 2)
+                                      .join(' ')),
+                                  Text(
+                                    ' ${modules[6].message.split(' ').last}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
