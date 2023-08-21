@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:newp/screens/social/view/notification_screens.dart';
 
 import '../../../../ablelyf.dart';
+import '../../model/chatmessage_response.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -10,6 +12,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,5 +157,23 @@ class _ChatPageState extends State<ChatPage> {
         ),
       ),
     );
+  }
+
+  void sendChatMessage(String content, int type, String groupChatId,
+      String currentUserId, String peerId) {
+    DocumentReference documentReference = firebaseFirestore
+        .collection('Chat')
+        .doc(groupChatId)
+        .collection(groupChatId)
+        .doc(DateTime.now().millisecondsSinceEpoch.toString());
+    ChatMessage chatMessages = ChatMessage(
+        id: currentUserId,
+        senderId: peerId,
+        time: DateTime.now().millisecondsSinceEpoch.toString() ,
+        type: type);
+
+    FirebaseFirestore.instance.runTransaction((transaction) async {
+      transaction.set(documentReference, chatMessages.toJson());
+    });
   }
 }
