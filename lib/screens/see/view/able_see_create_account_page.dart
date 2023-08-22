@@ -13,7 +13,7 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController fullnameController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -127,22 +127,26 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     TextField(
-                      controller: addressController,
+                      controller: phoneController,
                       decoration: InputDecoration(
-                          hintText: 'Address',
+                          hintText: 'Phome',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),
                     InkWell(
                       onTap: () {
-                        loginControlller.createEmailAccount(
-                          email:emailController.text,
-                          password:passwordController.text,
-                          name:nameController.text,
-                          fullname:fullnameController.text,
-                          address:addressController.text,
-                        );
-                        // Get.to(const LoginPage());
+                        if (emailController.text != '' &&
+                            passwordController.text != '') {
+                          loginControlller.createEmailAccount(
+                            email: emailController.text,
+                            password: passwordController.text,
+                            name: nameController.text,
+                            fullname: fullnameController.text,
+                            phone: phoneController.text,
+                          );
+                        } else {
+                          commonFunction.snackbar('Please fill yhe details');
+                        }
                       },
                       child: Container(
                         width: 1.sw,

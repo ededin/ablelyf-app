@@ -8,9 +8,8 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     constants = Constants();
-
-    await constants.init();
-
+    commonFunction = CommonFunction();
+    await appSharedPreference.init();
     await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
 
     // Pass all uncaught errors from the framework to Crashlytics.
@@ -73,7 +72,11 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: constants.themeColor),
             useMaterial3: true,
           ),
-          home: const LoginPage(),
+          home:
+              (appSharedPreference.getString(SharedPreferenceKeys.userId) ?? '')
+                      .isNotEmpty
+                  ? ModuleSelect()
+                  : LoginPage(),
         );
       },
     );
