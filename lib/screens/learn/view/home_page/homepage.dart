@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Expanded(
             child: TabBarView(controller: controller, children: [
               const BrowsePage(),
-              Container(),
+              const CategoryTab(),
               Container(),
             ]),
           )

@@ -10,6 +10,9 @@ void main() async {
     constants = Constants();
     commonFunction = CommonFunction();
     await appSharedPreference.init();
+
+    constants.myID =
+        (appSharedPreference.getString(SharedPreferenceKeys.userId) ?? '');
     await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
 
     // Pass all uncaught errors from the framework to Crashlytics.
@@ -72,11 +75,9 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: constants.themeColor),
             useMaterial3: true,
           ),
-          home:
-              (appSharedPreference.getString(SharedPreferenceKeys.userId) ?? '')
-                      .isNotEmpty
-                  ? ModuleSelect()
-                  : LoginPage(),
+          home: constants.myID.isNotEmpty
+              ? const ModuleSelect()
+              : const LoginPage(),
         );
       },
     );

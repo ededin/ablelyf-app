@@ -57,7 +57,7 @@ class LoginControlller extends GetxController {
           .signInWithEmailAndPassword(email: name, password: password);
       print('CREDENTIAL: ${credential}');
 
-      if (credential.credential != null) {
+      if (credential.user?.uid != null) {
         Get.to(const ModuleSelect());
       }
     } on FirebaseAuthException catch (e) {
