@@ -200,6 +200,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_tts",
+      "rootUri": "file:///C:/Users/clint/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_tts-3.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_web_plugins",
       "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
@@ -482,7 +488,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-08-25T16:22:00.864866Z",
+  "generated": "2023-08-26T11:19:49.916528Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }

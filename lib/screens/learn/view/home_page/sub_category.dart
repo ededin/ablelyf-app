@@ -1,9 +1,9 @@
 import '../../../../ablelyf.dart';
 
 class SubCategory extends StatefulWidget {
-  const SubCategory({super.key, required this.userId, required this.topic});
+  const SubCategory({super.key, this.userId, required this.topic});
 
-  final String userId;
+  final String? userId;
   final String topic;
 
   @override
@@ -11,6 +11,27 @@ class SubCategory extends StatefulWidget {
 }
 
 class _SubCategoryState extends State<SubCategory> {
+  final FlutterTts flutterTts = FlutterTts();
+  String text = '';
+  @override
+  void initState() {
+    flutterTts.setLanguage("en-US");
+    super.initState();
+  }
+
+  Future<void> speak() async {
+    await flutterTts.setVolume(0.5);
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.speak(text);
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +58,12 @@ class _SubCategoryState extends State<SubCategory> {
                 child: CircularProgressIndicator(),
               );
             }
+
+            if (snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text('No Category list'),
+              );
+            }
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
@@ -45,7 +72,11 @@ class _SubCategoryState extends State<SubCategory> {
                   child: SizedBox(
                     height: 80,
                     child: ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        // print('--------');
+                        text = snapshot.data!.docs[index]['pharse'];
+                        speak();
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

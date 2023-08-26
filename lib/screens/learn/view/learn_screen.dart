@@ -31,10 +31,10 @@ class _AbletoLearnState extends State<AbletoLearn> {
           const Text(
             'Talk2Go',
             style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 35,
-                fontStyle: FontStyle.italic),
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 35,
+            ),
           ),
           const SizedBox(height: 10),
           const Text(

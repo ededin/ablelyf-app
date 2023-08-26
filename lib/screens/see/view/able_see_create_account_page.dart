@@ -145,7 +145,7 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
                             phone: phoneController.text,
                           );
                         } else {
-                          commonFunction.snackbar('Please fill yhe details');
+                          commonFunction.snackbar('Please fill the details');
                         }
                       },
                       child: Container(
