@@ -296,10 +296,10 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
             const SizedBox(height: 30),
             InkWell(
               onTap: () async {
-                print('CONSTANTS.MYID: ${constants.myID}');
+                print('CONSTANTS.MYID: ${constants.myId}');
                 await FirebaseFirestore.instance
                     .collection('users')
-                    .doc(constants.myID)
+                    .doc(constants.myId)
                     .collection('myBookings')
                     .doc()
                     .set({

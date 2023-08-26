@@ -11,7 +11,7 @@ void main() async {
     commonFunction = CommonFunction();
     await appSharedPreference.init();
 
-    constants.myID =
+    constants.myId =
         (appSharedPreference.getString(SharedPreferenceKeys.userId) ?? '');
     await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
 
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: constants.themeColor),
             useMaterial3: true,
           ),
-          home: constants.myID.isNotEmpty
+          home: (constants.myId??'').isNotEmpty
               ? const ModuleSelect()
               : const LoginPage(),
         );

@@ -5,7 +5,7 @@ class Constants {
   String? myId = 'CRyUxM8Et1YseGeiwo5GU53DVhJ2';
   double screenWidth = 0;
 
-  String myID = '';
+  // String myID = '';
   Color themeColor = Colors.black;
   Color themeColor2 = Colors.black12;
   Color secondary = Colors.white;

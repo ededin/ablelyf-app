@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                hintText: 'Enter Name',
+                hintText: 'Enter Email',
                 hintStyle: const TextStyle(color: Colors.grey),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),

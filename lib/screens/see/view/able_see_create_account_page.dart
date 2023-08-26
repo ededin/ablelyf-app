@@ -129,7 +129,7 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
                     TextField(
                       controller: phoneController,
                       decoration: InputDecoration(
-                          hintText: 'Phome',
+                          hintText: 'Phone',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10))),
                     ),

@@ -26,7 +26,7 @@ class _MyBookingsState extends State<MyBookings> {
       body: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection('users')
-              .doc(constants.myID)
+              .doc(constants.myId)
               .collection('myBookings')
               .get(),
           builder: (context, snapshot) {
