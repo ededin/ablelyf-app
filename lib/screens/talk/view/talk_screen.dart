@@ -1,4 +1,3 @@
-import 'package:newp/screens/talk/view/talk_welcome_screen.dart';
 
 import '../../../ablelyf.dart';
 

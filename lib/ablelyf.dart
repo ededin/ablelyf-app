@@ -14,3 +14,5 @@ export 'package:firebase_core/firebase_core.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'package:date_format/date_format.dart';
 export 'package:flutter_tts/flutter_tts.dart';
+export 'package:image_picker/image_picker.dart';
+export 'package:file_picker/file_picker.dart';

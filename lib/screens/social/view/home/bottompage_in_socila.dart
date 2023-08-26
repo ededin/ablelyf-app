@@ -12,10 +12,13 @@ class _BottomPageSocialState extends State<BottomPageSocial> {
 
   final List _children = [
     const ConnectPage(),
-    const SearchPage(),
+    // const SearchPage(),
+    const NotificationPage(),
+    // Get.dialog(UploadPost()),
     Container(),
-    Container(),
-    Container(),
+
+    const MessagePage(),
+    const ProfilePage(),
   ];
   void _onTabTapped(int index) {
     setState(() {
@@ -80,17 +83,22 @@ class _BottomPageSocialState extends State<BottomPageSocial> {
                   backgroundColor: Colors.black,
                 ),
                 BottomNavigationBarItem(
-                  icon: selectIndex == 2
-                      ? Container(
-                          padding: const EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.black,
-                              border: Border.all(color: Colors.white)),
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 30,
+                  icon: selectIndex != 2
+                      ? InkWell(
+                          onTap: () {
+                            Get.bottomSheet(const UploadPost());
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black,
+                                border: Border.all(color: Colors.white)),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 30,
+                            ),
                           ),
                         )
                       : Container(
@@ -111,12 +119,12 @@ class _BottomPageSocialState extends State<BottomPageSocial> {
                 BottomNavigationBarItem(
                   icon: selectIndex == 3
                       ? const Icon(
-                          Icons.heart_broken_rounded,
+                          Icons.message,
                           color: Colors.white,
                           size: 30,
                         )
                       : const Icon(
-                          Icons.heart_broken,
+                          Icons.message,
                           color: Colors.white,
                           size: 25,
                         ),

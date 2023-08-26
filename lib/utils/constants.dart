@@ -2,6 +2,7 @@ import '../ablelyf.dart';
 
 class Constants {
   double screenHeight = 0;
+  String? myId = 'CRyUxM8Et1YseGeiwo5GU53DVhJ2';
   double screenWidth = 0;
 
   String myID = '';

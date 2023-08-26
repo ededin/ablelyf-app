@@ -27,21 +27,6 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
         centerTitle: true,
-        actions:  [
-          InkWell(
-            onTap: (){
-              Get.to(const ChatPage());
-
-            },
-            child: const CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://i.pinimg.com/564x/ce/ef/76/ceef76224c4de5c2255e42f6c733abc5.jpg'),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          )
-        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,10 +116,10 @@ class _SearchPageState extends State<SearchPage> with TickerProviderStateMixin {
               labelColor: Colors.black,
               unselectedLabelColor: Colors.black45,
               indicatorColor: Colors.black,
-              tabs: [
-                const Text('214K Photos'),
-                const Text('25 Videos'),
-                const Text('7 users'),
+              tabs: const [
+                Text('214K Photos'),
+                Text('25 Videos'),
+                Text('7 users'),
               ]),
           Expanded(
             child: TabBarView(controller: tabController, children: [
