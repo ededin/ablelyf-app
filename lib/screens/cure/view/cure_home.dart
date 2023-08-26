@@ -1,34 +1,50 @@
 import '../../../ablelyf.dart';
 
-class CureHome extends StatelessWidget {
+class CureHome extends StatefulWidget {
   const CureHome({super.key});
 
   @override
+  State<CureHome> createState() => _CureHomeState();
+}
+
+class _CureHomeState extends State<CureHome> {
+  List<Image> categoryImage = [
+    Image.asset(
+      CureImages.bone,
+      height: 0.06.sh,
+    ),
+    Image.asset(
+      CureImages.brain,
+      height: 0.06.sh,
+      color: Colors.white,
+    ),
+    Image.asset(
+      CureImages.therapy,
+      height: 0.06.sh,
+    ),
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    List<String> names = [
-      'Patrick',
-      'Mary',
-      'William',
-      'Arthur',
-    ];
-
-    List<String> number = [
-      '865-7638-5',
-      '652-8734-3',
-      '523-7634-2',
-      '653-2798-5',
-    ];
-
-    List<String> specialist = [
-      'Occupational therapist',
-      'ENT Specialist',
-      'Speech therapist',
-      'Orthopedics',
-    ];
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
-        title: Text('Cure'),
+        title: const Text('Cure'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(() {
+                  return const MyBookings();
+                });
+              },
+              icon: const Icon(
+                Icons.history,
+                size: 25,
+              )),
+          const SizedBox(
+            width: 10,
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -101,96 +117,70 @@ class CureHome extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: constants.themeColor2,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Image.asset(
-                            CureImages.bone,
-                            height: 0.06.sh,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '\nPhysical',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: constants.themeColor2.withOpacity(0.5),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: constants.themeColor,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(15),
-                          child: ImageIcon(
-                            AssetImage(CureImages.brain),
-                            size: 50,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '\nMental care',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: constants.themeColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: constants.themeColor2,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Image.asset(
-                            CureImages.therapy,
-                            height: 0.06.sh,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        '\nTherapy',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: constants.themeColor2.withOpacity(0.5),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            FutureBuilder(
+                future: FirebaseFirestore.instance.collection('therapy').get(),
+                builder: (context, snapData) {
+                  print('snapData:------- ${snapData.data}');
+                  if (snapData.data == null) {
+                    return const SizedBox();
+                  }
+
+                  return SizedBox(
+                    height: 150,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> therapyName =
+                              snapData.data!.docs[index].data();
+
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 30, top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(CategoryList(
+                                          catname:
+                                              therapyName['typeof_therapy'],
+                                          catId: therapyName['id'],
+                                        ));
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: constants.themeColor2,
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        child: Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: categoryImage[index]),
+                                      ),
+                                    ),
+                                    Text(
+                                      '\n${therapyName['typeof_therapy']}',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: constants.themeColor2
+                                            .withOpacity(0.5),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                  );
+                }),
             Center(
               child: Text(
-                '\nSpecialist',
+                'Specialist',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: constants.themeColor,
@@ -199,63 +189,95 @@ class CureHome extends StatelessWidget {
                 ),
               ),
             ),
-            for (int i = 0; i < 4; i++)
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AppointmentBookScreen(
-                        name: names[i],
-                        specalist: specialist[i],
-                        image: 'assets/images/cure/doctor$i.png',
-                      ),
-                    ),
+            FutureBuilder(
+                future: FirebaseFirestore.instance
+                    .collection('therapyDoctor')
+                    .get(),
+                builder: (context, snap) {
+                  if (snap.data == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return SizedBox(
+                    height: 400,
+                    child: ListView.builder(
+                        itemCount: snap.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> doctorDetails =
+                              snap.data!.docs[index].data();
+                          return FutureBuilder(
+                              future: FirebaseFirestore.instance
+                                  .collection('therapyCategory')
+                                  .where('id',
+                                      isEqualTo: doctorDetails['category'])
+                                  .get(),
+                              builder: (context, snapshot) {
+                                if (snapshot.data == null) {
+                                  return const SizedBox();
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AppointmentBookScreen(
+                                          doctorid: doctorDetails['id'],
+                                          name: doctorDetails['doctor_name'],
+                                          specalist: snapshot.data!.docs[0]
+                                              .data()['name'],
+                                          image: doctorDetails['image'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsetsDirectional.all(8),
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 0.07.sw,
+                                          backgroundColor:
+                                              constants.themeColor2,
+                                          backgroundImage:
+                                              CachedNetworkImageProvider(
+                                                  doctorDetails['image']),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 25),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Dr ${doctorDetails['doctor_name']}",
+                                                style: TextStyle(
+                                                  color: constants.themeColor,
+                                                ),
+                                              ),
+                                              Text(
+                                                snapshot.data!.docs[0]
+                                                    .data()['name'],
+                                              ),
+                                              Text(
+                                                doctorDetails['phone'],
+                                                style: const TextStyle(),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        }),
                   );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 15,
-                    horizontal: 20,
-                  ),
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CircleAvatar(
-                        radius: 0.1.sw,
-                        backgroundColor: constants.themeColor2,
-                        backgroundImage:
-                            AssetImage('assets/images/cure/doctor$i.png'),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Dr ${names[i]}",
-                              style: TextStyle(
-                                color: constants.themeColor,
-                              ),
-                            ),
-                            Text(
-                              specialist[i],
-                              style: TextStyle(
-                                  // color: constants.themeColor,
-                                  ),
-                            ),
-                            Text(
-                              number[i],
-                              style: TextStyle(
-                                  // color: constants.themeColor,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              )
+                })
           ],
         ),
       ),

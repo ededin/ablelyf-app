@@ -57,6 +57,8 @@ class LoginControlller extends GetxController {
           .signInWithEmailAndPassword(email: name, password: password);
       print('CREDENTIAL: ${credential}');
 
+      constants.myID = credential.user!.uid;
+      print('CONSTANTS.MYID: ${constants.myID}');
       if (credential.user?.uid != null) {
         Get.to(const ModuleSelect());
       }

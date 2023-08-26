@@ -1,21 +1,21 @@
-import '../../../../ablelyf.dart';
+import '../../../ablelyf.dart';
 
-class SubCategory extends StatefulWidget {
-  const SubCategory({super.key, required this.userId, required this.topic});
+class CategoryList extends StatefulWidget {
+  const CategoryList({super.key, required this.catId, required this.catname});
 
-  final String userId;
-  final String topic;
+  final String catId;
+  final String catname;
 
   @override
-  State<SubCategory> createState() => _SubCategoryState();
+  State<CategoryList> createState() => _CategoryListState();
 }
 
-class _SubCategoryState extends State<SubCategory> {
+class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.topic),
+        title: Text(widget.catname),
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
@@ -28,8 +28,8 @@ class _SubCategoryState extends State<SubCategory> {
       ),
       body: FutureBuilder(
           future: FirebaseFirestore.instance
-              .collection('learnPharses')
-              .where('category', isEqualTo: widget.userId)
+              .collection('therapyCategory')
+              .where('category', isEqualTo: widget.catId)
               .get(),
           builder: (context, snapshot) {
             if (snapshot.data == null) {
@@ -37,21 +37,32 @@ class _SubCategoryState extends State<SubCategory> {
                 child: CircularProgressIndicator(),
               );
             }
+
+            if (snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text('No List'),
+              );
+            }
             return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
+                Map<String, dynamic> data = snapshot.data!.docs[index].data();
                 return Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
                     height: 80,
                     child: ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(DoctorList(
+                          doctorId: data['id'],
+                        ));
+                      },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      tileColor: Colors.blueGrey[200],
+                      tileColor: Colors.grey[200],
                       title: Text(
-                        '${snapshot.data!.docs[index]['pharse']}',
+                        '${data['name']}',
                         style: const TextStyle(fontSize: 18),
                       ),
                     ),
