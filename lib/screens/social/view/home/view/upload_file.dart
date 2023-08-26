@@ -154,7 +154,9 @@ class _UploadPostState extends State<UploadPost> {
                                     topRight: Radius.circular(15.0),
                                     bottomLeft: Radius.circular(15.0))))),
                     //if user click this button, user can upload image from gallery
-                    onPressed: () async {
+                    onPressed: () {
+                      Get.to(const VideoPlayershow());
+
                       // Navigator.pop(context);
                     },
                     child: Row(
@@ -164,7 +166,7 @@ class _UploadPostState extends State<UploadPost> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.black.withOpacity(0.3)),
-                          child: Icon(
+                          child: const Icon(
                             Icons.videocam,
                             color: Colors.black,
                           ),

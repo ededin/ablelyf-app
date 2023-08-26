@@ -11,3 +11,4 @@ export 'home/view/view.dart';
 export 'message_page/image_pereviewpage.dart';
 export 'message_page/message_mainpage.dart';
 export 'notification_screens.dart';
+export 'video_player/video_player.dart';
