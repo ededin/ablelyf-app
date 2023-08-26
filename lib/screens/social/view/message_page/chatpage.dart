@@ -5,9 +5,10 @@ import 'package:newp/screens/social/controller/message_controller.dart';
 import '../../../../ablelyf.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({super.key, this.name, this.email});
+  const ChatPage({super.key, this.name, this.email, required this.id});
   final String? name;
   final String? email;
+  final String id;
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -69,8 +70,12 @@ class _ChatPageState extends State<ChatPage> {
                               onTap: () async {
                                 await getImage(ImageSource.camera);
                                 Future.delayed(const Duration(seconds: 1), () {
-                                  Get.to(ImagePreview(
-                                      image: File(image?.path ?? '')));
+                                  Get.to(
+                                    ImagePreview(
+                                      id: widget.id,
+                                      image: File(image?.path ?? ''),
+                                    ),
+                                  );
                                 });
                               },
                               child: Icon(Icons.camera_enhance,
@@ -87,13 +92,12 @@ class _ChatPageState extends State<ChatPage> {
 
                                   firebaseFirestore
                                       .collection("chat")
-                                      .doc(getChatId(
-                                          "MQtCWxSzxkgHwm5lJknkR3JZqtH3"))
+                                      .doc(getChatId(widget.id))
                                       .collection("messages")
                                       .doc(time.toString())
                                       .set({
                                     'senderid': constants.myId,
-                                    'chatid': 'MQtCWxSzxkgHwm5lJknkR3JZqtH3',
+                                    'chatid': getChatId(widget.id),
                                     'time': time,
                                     'content': textEditingController.text,
                                     'type': MessageType.text.index,
@@ -164,7 +168,7 @@ class _ChatPageState extends State<ChatPage> {
           StreamBuilder(
             stream: firebaseFirestore
                 .collection("chat")
-                .doc(getChatId("MQtCWxSzxkgHwm5lJknkR3JZqtH3"))
+                .doc(getChatId(widget.id))
                 .collection("messages")
                 .orderBy('time', descending: true)
                 .snapshots(),
@@ -189,8 +193,7 @@ class _ChatPageState extends State<ChatPage> {
                               // var timestamp = data?['time'];
                               // var time = DateTime.fromMillisecondsSinceEpoch(timestamp);
                               // d12 = DateFormat('hh:mm a').format(time);
-                              return constants.myId ==
-                                      'MQtCWxSzxkgHwm5lJknkR3JZqtH3'
+                              return constants.myId != data?['senderid']
                                   ? Align(
                                       alignment: Alignment.centerLeft,
                                       child: Card(
@@ -207,7 +210,7 @@ class _ChatPageState extends State<ChatPage> {
                                             padding: const EdgeInsets.all(15.0),
                                             decoration: BoxDecoration(
                                                 borderRadius: const BorderRadius
-                                                        .only(
+                                                    .only(
                                                     topRight:
                                                         Radius.circular(25.0),
                                                     bottomLeft:

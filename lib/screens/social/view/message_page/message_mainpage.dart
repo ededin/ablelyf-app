@@ -68,6 +68,7 @@ class _MessagePageState extends State<MessagePage> {
                                 Get.to(ChatPage(
                                   name: dataa?['name'],
                                   email: dataa?['email'],
+                                  id: dataa?['id'],
                                 ));
                               },
                               child: ListTile(
@@ -104,7 +105,6 @@ class _MessagePageState extends State<MessagePage> {
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.italic),
                       ));
-                
               }
             },
           )
