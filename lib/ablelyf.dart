@@ -11,3 +11,6 @@ export 'package:data_table_2/data_table_2.dart';
 export 'package:firebase_auth/firebase_auth.dart';
 export 'package:firebase_crashlytics/firebase_crashlytics.dart';
 export 'package:firebase_core/firebase_core.dart';
+export 'package:image_picker/image_picker.dart';
+export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:file_picker/file_picker.dart';

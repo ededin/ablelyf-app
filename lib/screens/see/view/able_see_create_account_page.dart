@@ -135,13 +135,14 @@ class _AbleSeeCreateAccountState extends State<AbleSeeCreateAccount> {
                     ),
                     InkWell(
                       onTap: () {
-                        loginControlller.createEmailAccount(
-                          email:emailController.text,
-                          password:passwordController.text,
-                          name:nameController.text,
-                          fullname:fullnameController.text,
-                          address:addressController.text,
-                        );
+                        // loginControlller.createEmailAccount(
+                        //   email:emailController.text,
+                        //   password:passwordController.text,
+                        //   name:nameController.text,
+                        //   fullname:fullnameController.text,
+                        //   address:addressController.text,
+                        // );
+                        Get.to(const ModuleSelect());
                         // Get.to(const LoginPage());
                       },
                       child: Container(
