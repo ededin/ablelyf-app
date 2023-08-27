@@ -5,16 +5,10 @@ import 'package:newp/screens/social/controller/message_controller.dart';
 import '../../../../ablelyf.dart';
 
 class ChatPage extends StatefulWidget {
-<<<<<<< HEAD
-  const ChatPage({super.key, this.name, this.email});
-  final String? name;
-  final String? email;
-=======
   const ChatPage({super.key, this.name, this.email, required this.id});
   final String? name;
   final String? email;
   final String id;
->>>>>>> merge
 
   @override
   State<ChatPage> createState() => _ChatPageState();

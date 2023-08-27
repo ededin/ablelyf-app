@@ -35,18 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
           );
         } else {
           return FutureBuilder(
-<<<<<<< HEAD
-            future: firebaseFirestore
-                .collection('users')
-                .doc(constants.myId)
-                .collection('posts')
-                .get(),
-            builder: (BuildContext context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                    sathishshot) {
-              return ListView(
-                children: [
-=======
               future: firebaseFirestore
                   .collection('users')
                   .doc(constants.myId)
@@ -56,7 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                       sathishshot) {
                 return ListView(children: [
->>>>>>> merge
                   Stack(children: [
                     Container(
                       width: 1.sw,
