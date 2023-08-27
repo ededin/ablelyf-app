@@ -17,10 +17,10 @@ class _MessagePageState extends State<MessagePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: const Icon(
+        /* leading: const Icon(
           Icons.arrow_back,
           color: Colors.black,
-        ),
+        ), */
         centerTitle: true,
         title: const Text(
           'Message',
@@ -45,71 +45,65 @@ class _MessagePageState extends State<MessagePage> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          FutureBuilder(
-            future: firebaseFirestore.collection('users').get(),
-            builder: (BuildContext context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return (snapshot.data?.docs ?? []).isNotEmpty
-                    ? Expanded(
-                        child: ListView.builder(
-                          itemCount: snapshot.data?.docs.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var dataa = snapshot.data?.docs[index].data();
+      body: FutureBuilder(
+        future: firebaseFirestore.collection('users').get(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return (snapshot.data?.docs ?? []).isNotEmpty
+                ? ListView.builder(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var dataa = snapshot.data?.docs[index].data();
 
-                            return InkWell(
-                              onTap: () {
-                                Get.to(ChatPage(
-                                  name: dataa?['name'],
-                                  email: dataa?['email'],
-                                  id: dataa?['id'],
-                                ));
-                              },
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(dataa?[
-                                          'profileImage'] ??
-                                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
-                                ),
-                                title: Text(
-                                  dataa?['name'],
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                                subtitle: Text(
-                                  dataa?['email'],
-                                  style: const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            );
-                          },
+                      return InkWell(
+                        onTap: () {
+                          Get.to(ChatPage(
+                            name: dataa?['name'],
+                            email: dataa?['email'],
+                            id: dataa?['id'],
+                          ));
+                        },
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(dataa?[
+                                    'profileImage'] ??
+                                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                          ),
+                          title: Text(
+                            dataa?['name'],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic),
+                          ),
+                          subtitle: Text(
+                            dataa?['email'],
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.italic),
+                          ),
                         ),
-                      )
-                    : const Center(
-                        child: Text(
-                        'No List Found',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontStyle: FontStyle.italic),
-                      ));
-              }
-            },
-          )
-        ],
+                      );
+                    },
+                  )
+                : const Center(
+                    child: Text(
+                    'No List Found',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic),
+                  ));
+          }
+        },
       ),
     );
   }
