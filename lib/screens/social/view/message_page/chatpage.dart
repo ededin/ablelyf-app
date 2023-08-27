@@ -38,105 +38,111 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: Row(
-        children: [
-          const SizedBox(
-            width: 20,
-          ),
-          const Icon(
-            Icons.more_horiz,
-            weight: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)),
-              child: SizedBox(
-                height: 46,
-                width: 0.80.sw,
-                child: TextField(
-                  controller: textEditingController,
-                  style: const TextStyle(fontSize: 17, color: Colors.black),
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Spacer(),
-                            InkWell(
-                              onTap: () async {
-                                await getImage(ImageSource.camera);
-                                Future.delayed(const Duration(seconds: 1), () {
-                                  Get.to(
-                                    ImagePreview(
-                                      id: widget.id,
-                                      image: File(image?.path ?? ''),
-                                    ),
-                                  );
-                                });
-                              },
-                              child: Icon(Icons.camera_enhance,
-                                  color: Theme.of(context).iconTheme.color),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                if (textEditingController.text.isNotEmpty) {
-                                  int time =
-                                      DateTime.now().millisecondsSinceEpoch;
-
-                                  firebaseFirestore
-                                      .collection("chat")
-                                      .doc(getChatId(widget.id))
-                                      .collection("messages")
-                                      .doc(time.toString())
-                                      .set({
-                                    'senderid': constants.myId,
-                                    'chatid': getChatId(widget.id),
-                                    'time': time,
-                                    'content': textEditingController.text,
-                                    'type': MessageType.text.index,
-                                  });
-                                  textEditingController.clear();
-                                } else {
-                                  Get.snackbar(
-                                      'Ablelyf', 'Please Type Something',
-                                      messageText: const Text(
-                                        'Please Type Something',
-                                        style: TextStyle(color: Colors.white),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            const Icon(
+              Icons.more_horiz,
+              weight: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: SizedBox(
+                  height: 46,
+                  width: 0.80.sw,
+                  child: TextField(
+                    controller: textEditingController,
+                    style: const TextStyle(fontSize: 17, color: Colors.black),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Spacer(),
+                              InkWell(
+                                onTap: () async {
+                                  await getImage(ImageSource.camera);
+                                  Future.delayed(const Duration(seconds: 1),
+                                      () {
+                                    Get.to(
+                                      ImagePreview(
+                                        id: widget.id,
+                                        image: File(image?.path ?? ''),
                                       ),
-                                      backgroundColor: Colors.red,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      snackStyle: SnackStyle.FLOATING);
-                                }
-                              },
-                              child: Icon(Icons.send,
-                                  color: Theme.of(context).iconTheme.color),
-                            ),
-                          ],
+                                    );
+                                  });
+                                },
+                                child: Icon(Icons.camera_enhance,
+                                    color: Theme.of(context).iconTheme.color),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (textEditingController.text.isNotEmpty) {
+                                    int time =
+                                        DateTime.now().millisecondsSinceEpoch;
+
+                                    firebaseFirestore
+                                        .collection("chat")
+                                        .doc(getChatId(widget.id))
+                                        .collection("messages")
+                                        .doc(time.toString())
+                                        .set({
+                                      'senderid': constants.myId,
+                                      'chatid': getChatId(widget.id),
+                                      'time': time,
+                                      'content': textEditingController.text,
+                                      'type': MessageType.text.index,
+                                    });
+                                    textEditingController.clear();
+                                  } else {
+                                    Get.snackbar(
+                                        'Ablelyf', 'Please Type Something',
+                                        messageText: const Text(
+                                          'Please Type Something',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        backgroundColor: Colors.red,
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        snackStyle: SnackStyle.FLOATING);
+                                  }
+                                },
+                                child: Icon(Icons.send,
+                                    color: Theme.of(context).iconTheme.color),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      // prefixIcon: Icon(Icons.search,
-                      //     color: Theme.of(context).iconTheme.color),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      fillColor:
-                          Theme.of(context).inputDecorationTheme.fillColor,
-                      contentPadding: const EdgeInsets.all(10.0),
-                      hintText: '    Type your message here.',
-                      hintStyle:
-                          const TextStyle(color: Colors.black, fontSize: 17)),
+                        // prefixIcon: Icon(Icons.search,
+                        //     color: Theme.of(context).iconTheme.color),
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: '    Type your message here.',
+                        hintStyle:
+                            const TextStyle(color: Colors.black, fontSize: 17)),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -153,14 +159,14 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
         actions: [
-          const Icon(Icons.call),
-          const SizedBox(
-            width: 10,
-          ),
-          InkWell(onTap: () {}, child: const Icon(Icons.video_call)),
-          const SizedBox(
-            width: 10,
-          )
+          // const Icon(Icons.call),
+          // const SizedBox(
+          //   width: 10,
+          // ),
+          // InkWell(onTap: () {}, child: const Icon(Icons.video_call)),
+          // const SizedBox(
+          //   width: 10,
+          // )
         ],
       ),
       body: Column(
@@ -210,7 +216,7 @@ class _ChatPageState extends State<ChatPage> {
                                             padding: const EdgeInsets.all(15.0),
                                             decoration: BoxDecoration(
                                                 borderRadius: const BorderRadius
-                                                    .only(
+                                                        .only(
                                                     topRight:
                                                         Radius.circular(25.0),
                                                     bottomLeft:
