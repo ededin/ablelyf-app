@@ -1,3 +1,4 @@
+import 'dart:io';
 import '../../../../ablelyf.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -21,6 +22,22 @@ class _ProfilePageState extends State<ProfilePage> {
     'https://i.pinimg.com/originals/43/7e/45/437e45bee2148572f496298ac21ab2e5.jpg',
     'https://images.unsplash.com/photo-1611162616475-46b635cb6868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dmlkZW9zfGVufDB8fDB8fHww&w=1000&q=80',
   ];
+
+  XFile? image;
+  final ImagePicker picker = ImagePicker();
+
+  Future getImage(ImageSource media) async {
+    var img = await picker.pickImage(source: media);
+
+    Future.delayed(const Duration(seconds: 1), () {
+      Get.to(ProfileImagePreview(image: File(image?.path ?? '')));
+    });
+
+    setState(() {
+      image = img;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,20 +104,58 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         )),
                   ]),
-                  ListTile(
-                    leading: CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(dataa?['profileImage'] ??
-                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
-                    ),
-                    title: Text(dataa?['name'],
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    subtitle: const Text('Software Engineer',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black45,
-                            fontSize: 18)),
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          profileBottom(context);
+                        },
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                  image: CachedNetworkImageProvider(dataa?[
+                                          'profileImage'] ??
+                                      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
+                                  fit: BoxFit.cover)),
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(100)),
+                              child: const Icon(
+                                Icons.camera_alt,
+                                size: 18,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(dataa?['name'],
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20)),
+                          const Text('Software Engineer',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black45,
+                                  fontSize: 18)),
+                        ],
+                      )
+                    ],
                   ),
                   const SizedBox(
                     height: 20,
@@ -324,5 +379,96 @@ class _ProfilePageState extends State<ProfilePage> {
         }
       },
     ));
+  }
+
+  profileBottom(BuildContext context) {
+    showBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            width: 400,
+            height: 0.2.sh,
+            padding: const EdgeInsets.only(left: 20),
+            decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15))),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  'Select',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () async {
+                      await getImage(ImageSource.gallery);
+                      Get.back();
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsetsDirectional.all(5.0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.black.withOpacity(0.3)),
+                          child: const Icon(
+                            Icons.image,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        const Text(
+                          'From Gallery',
+                          style: TextStyle(color: Colors.black, fontSize: 17),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      getImage(ImageSource.camera);
+                      Get.back();
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                            padding: const EdgeInsetsDirectional.all(5.0),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black.withOpacity(0.3)),
+                            child: const Icon(
+                              Icons.camera,
+                              color: Colors.black,
+                            )),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        const Text(
+                          'From Camera',
+                          style: TextStyle(color: Colors.black, fontSize: 17),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
   }
 }
