@@ -45,32 +45,37 @@ class _ProductsListState extends State<ProductsList> {
                   var showList = snapshot.data!.docs[index].data();
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 120,
-                          width: 180,
-                          child: CachedNetworkImage(
-                            imageUrl: showList['products_image'],
-                            fit: BoxFit.cover,
+                    child: InkWell(
+                      onTap: () {
+                        // ProductDetailsPage(productDescription: ,)
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 120,
+                            width: 180,
+                            child: CachedNetworkImage(
+                              imageUrl: showList['products_image'],
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Text(
-                          showList['products_type'],
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                          Text(
+                            showList['products_type'],
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          '\$${showList['products_price']}',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
+                          Text(
+                            '\$${showList['products_price']}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 });

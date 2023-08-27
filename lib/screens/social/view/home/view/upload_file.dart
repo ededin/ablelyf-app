@@ -56,7 +56,8 @@ class _UploadPostState extends State<UploadPost> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width: 0.50.sw,
+                  // width: 0.50.sw,
+                  
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:
@@ -102,7 +103,7 @@ class _UploadPostState extends State<UploadPost> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width: 0.50.sw,
+                  // width: 0.50.sw,
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor:

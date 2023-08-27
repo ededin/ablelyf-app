@@ -64,25 +64,26 @@ class _SubCategoryState extends State<SubCategory> {
                 child: Text('No Category list'),
               );
             }
-            return ListView.builder(
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 5, mainAxisSpacing: 5, crossAxisCount: 3),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(10),
-                  child: SizedBox(
-                    height: 80,
-                    child: ListTile(
-                      onTap: () {
-                        // print('--------');
-                        text = snapshot.data!.docs[index]['pharse'];
-                        speak();
-                      },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      tileColor: Colors.blueGrey[200],
-                      title: Text(
-                        '${snapshot.data!.docs[index]['pharse']}',
+                  child: InkWell(
+                    onTap: () {
+                      text = snapshot.data!.docs[index].data()['pharse'];
+                      speak();
+                    },
+                    child: Container(
+                      height: 80,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Colors.blueGrey[200],
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        '${snapshot.data!.docs[index].data()['pharse']}',
                         style: const TextStyle(fontSize: 18),
                       ),
                     ),
