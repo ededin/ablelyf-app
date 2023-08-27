@@ -66,7 +66,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               // height: 70,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     'You have 10 words today!\n50% of your daily goal is completed.',
                     style: TextStyle(color: Colors.black45),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30.0,
                   ),
                   SizedBox(
@@ -120,7 +121,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           Expanded(
             child: TabBarView(controller: controller, children: [
               const BrowsePage(),
-              Container(),
+              const CategoryTab(),
               Container(),
             ]),
           )

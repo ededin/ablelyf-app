@@ -166,7 +166,7 @@ class _UploadPostState extends State<UploadPost> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: Colors.black.withOpacity(0.3)),
-                          child: const Icon(
+                          child: Icon(
                             Icons.videocam,
                             color: Colors.black,
                           ),

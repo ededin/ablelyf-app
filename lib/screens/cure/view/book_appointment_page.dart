@@ -4,11 +4,14 @@ class AppointmentBookScreen extends StatefulWidget {
   final String name;
   final String specalist;
   final String image;
+  final String doctorid;
+
   const AppointmentBookScreen({
     super.key,
     required this.name,
     required this.specalist,
     required this.image,
+    required this.doctorid,
   });
 
   @override
@@ -31,7 +34,8 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
 
   int selectedSlot = 0;
 
-  DateTime initialDate = DateTime.now().subtract(const Duration(days: 2));
+  DateTime initialDate = DateTime.now();
+  var selectDate = formatDate(DateTime.now(), [dd, '-', mm, '-', yy]);
   @override
   void initState() {
     super.initState();
@@ -65,7 +69,7 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
                   CircleAvatar(
                     radius: 0.1.sw,
                     backgroundColor: constants.themeColor2,
-                    backgroundImage: AssetImage(widget.image),
+                    backgroundImage: CachedNetworkImageProvider(widget.image),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 25),
@@ -74,7 +78,7 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
                       children: [
                         Text(
                           "Dr ${widget.name}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             // color: constants.themeColor,
                             fontSize: 25,
                           ),
@@ -102,6 +106,8 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
               showMonth: true,
               locale: Localizations.localeOf(context),
               onDateSelected: (date) {
+                selectDate = formatDate(date, [dd, '-', mm, '-', yy]);
+                print('SELECTDATE: ${selectDate}');
                 // print('DATE: ${(date as DateTime)}');
                 // appointmentController.getSlots(date: date);
               },
@@ -289,7 +295,22 @@ class AppointmentBookScreenState extends State<AppointmentBookScreen> {
             // ),
             const SizedBox(height: 30),
             InkWell(
-              onTap: () {
+              onTap: () async {
+                print('CONSTANTS.MYID: ${constants.myId}');
+                await FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(constants.myId)
+                    .collection('myBookings')
+                    .doc()
+                    .set({
+                  'doctorId': widget.doctorid,
+                  'doctor_name': widget.name,
+                  'doctor_profile': widget.image,
+                  'category': widget.specalist,
+                  'date': selectDate,
+                  'time': slots[selectedSlot],
+                });
+
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const CureHome()));
               },

@@ -10,9 +10,16 @@ class BrowsePage extends StatefulWidget {
 class _BrowsePageState extends State<BrowsePage> {
   List categoriesList = [
     'Greetings',
-    'Phrases',
-    'Emotions',
-    'Needs and',
+    'Wishes',
+    'Help',
+    'Question',
+  ];
+
+  List<String> categoriesListId = [
+    'O7LGdAGnf57EPkN899oN',
+    'p5IWSeCuSEANntzA9nAd',
+    'BxYE0bBOxZKmlfxHJg88',
+    'xoN4RMrkBSyLOSB1m0wO',
   ];
 
   List<Icon> categoriesIcon = const [
@@ -33,6 +40,67 @@ class _BrowsePageState extends State<BrowsePage> {
       size: 30,
     ),
   ];
+
+  List<String> emotion = [
+    'I feel',
+    'Happy',
+    'Sad',
+    'Angry',
+    'Sick',
+    'Hungry',
+    'Sleepy',
+    'Bored',
+    'Scared'
+  ];
+
+  List<String> basic = [
+    'I',
+    'You',
+    'Like',
+    'Want',
+    'Do',
+    'That',
+    'Not',
+    'Stop',
+    'Help me',
+    'Gone',
+    'Big',
+    'Small',
+    'Eat',
+    'Play',
+    'Go',
+  ];
+
+  List<String> pharse = [
+    'I want',
+    'I dont want',
+    'I like',
+    'I love',
+    'I like you',
+    'I dont like',
+    'This is',
+    'Where is',
+    'Can i',
+    'I can',
+    'I lost',
+    'I have',
+    'I want to play',
+    'I want to eat',
+    'I want to go to',
+    'I want to wear',
+    'please phone',
+    'I want to talk to',
+    'Not',
+    'I ate',
+    'I drank',
+    'I need help'
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -340,34 +408,58 @@ class _BrowsePageState extends State<BrowsePage> {
             height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for (int i = 0; i <= 3; i++)
-                  Column(
-                    children: [
-                      Container(
-                        height: 80,
-                        width: 0.2.sw,
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 231, 230, 230),
-                            borderRadius: BorderRadius.circular(25)),
-                        child: categoriesIcon[i],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        categoriesList[i],
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w500),
-                      ),
-                    ],
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  for (int i = 0; i <= 3; i++)
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            // for (int i = 0; i < pharse.length; i++) {
+                            //   FirebaseFirestore.instance
+                            //       .collection('learnPharses')
+                            //       .add({
+                            //     'category': 'p5IWSeCuSEANntzA9nAd',
+                            //     'pharse': pharse[i],
+                            //   });
+                            // }
+
+                            Get.to(() {
+                              return SubCategory(
+                                userId: categoriesListId[i],
+                                topic: categoriesList[i],
+                              );
+                            });
+                          },
+                          child: Container(
+                            height: 80,
+                            width: 0.2.sw,
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 231, 230, 230),
+                                borderRadius: BorderRadius.circular(25)),
+                            child: categoriesIcon[i],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          categoriesList[i],
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  const SizedBox(
+                    width: 5,
                   )
-              ],
-            ),
+                ],
+              )),
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),

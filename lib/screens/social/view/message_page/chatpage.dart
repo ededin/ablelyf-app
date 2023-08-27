@@ -5,9 +5,16 @@ import 'package:newp/screens/social/controller/message_controller.dart';
 import '../../../../ablelyf.dart';
 
 class ChatPage extends StatefulWidget {
+<<<<<<< HEAD
   const ChatPage({super.key, this.name, this.email});
   final String? name;
   final String? email;
+=======
+  const ChatPage({super.key, this.name, this.email, required this.id});
+  final String? name;
+  final String? email;
+  final String id;
+>>>>>>> merge
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -37,102 +44,111 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: Row(
-        children: [
-          const SizedBox(
-            width: 20,
-          ),
-          const Icon(
-            Icons.more_horiz,
-            weight: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0)),
-              child: SizedBox(
-                height: 46,
-                width: 0.80.sw,
-                child: TextField(
-                  controller: textEditingController,
-                  style: const TextStyle(fontSize: 17, color: Colors.black),
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Spacer(),
-                            InkWell(
-                              onTap: () async {
-                                await getImage(ImageSource.camera);
-                                Future.delayed(const Duration(seconds: 1), () {
-                                  Get.to(ImagePreview(
-                                      image: File(image?.path ?? '')));
-                                });
-                              },
-                              child: Icon(Icons.camera_enhance,
-                                  color: Theme.of(context).iconTheme.color),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                if (textEditingController.text.isNotEmpty) {
-                                  int time =
-                                      DateTime.now().millisecondsSinceEpoch;
-
-                                  firebaseFirestore
-                                      .collection("chat")
-                                      .doc(getChatId(
-                                          "MQtCWxSzxkgHwm5lJknkR3JZqtH3"))
-                                      .collection("messages")
-                                      .doc(time.toString())
-                                      .set({
-                                    'senderid': constants.myId,
-                                    'chatid': 'MQtCWxSzxkgHwm5lJknkR3JZqtH3',
-                                    'time': time,
-                                    'content': textEditingController.text,
-                                    'type': MessageType.text.index,
-                                  });
-                                  textEditingController.clear();
-                                } else {
-                                  Get.snackbar(
-                                      'Ablelyf', 'Please Type Something',
-                                      messageText: const Text(
-                                        'Please Type Something',
-                                        style: TextStyle(color: Colors.white),
+      bottomNavigationBar: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            const Icon(
+              Icons.more_horiz,
+              weight: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: SizedBox(
+                  height: 46,
+                  width: 0.80.sw,
+                  child: TextField(
+                    controller: textEditingController,
+                    style: const TextStyle(fontSize: 17, color: Colors.black),
+                    textAlignVertical: TextAlignVertical.center,
+                    decoration: InputDecoration(
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Spacer(),
+                              InkWell(
+                                onTap: () async {
+                                  await getImage(ImageSource.camera);
+                                  Future.delayed(const Duration(seconds: 1),
+                                      () {
+                                    Get.to(
+                                      ImagePreview(
+                                        id: widget.id,
+                                        image: File(image?.path ?? ''),
                                       ),
-                                      backgroundColor: Colors.red,
-                                      snackPosition: SnackPosition.BOTTOM,
-                                      snackStyle: SnackStyle.FLOATING);
-                                }
-                              },
-                              child: Icon(Icons.send,
-                                  color: Theme.of(context).iconTheme.color),
-                            ),
-                          ],
+                                    );
+                                  });
+                                },
+                                child: Icon(Icons.camera_enhance,
+                                    color: Theme.of(context).iconTheme.color),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  if (textEditingController.text.isNotEmpty) {
+                                    int time =
+                                        DateTime.now().millisecondsSinceEpoch;
+
+                                    firebaseFirestore
+                                        .collection("chat")
+                                        .doc(getChatId(widget.id))
+                                        .collection("messages")
+                                        .doc(time.toString())
+                                        .set({
+                                      'senderid': constants.myId,
+                                      'chatid': getChatId(widget.id),
+                                      'time': time,
+                                      'content': textEditingController.text,
+                                      'type': MessageType.text.index,
+                                    });
+                                    textEditingController.clear();
+                                  } else {
+                                    Get.snackbar(
+                                        'Ablelyf', 'Please Type Something',
+                                        messageText: const Text(
+                                          'Please Type Something',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        backgroundColor: Colors.red,
+                                        snackPosition: SnackPosition.BOTTOM,
+                                        snackStyle: SnackStyle.FLOATING);
+                                  }
+                                },
+                                child: Icon(Icons.send,
+                                    color: Theme.of(context).iconTheme.color),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      // prefixIcon: Icon(Icons.search,
-                      //     color: Theme.of(context).iconTheme.color),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      fillColor:
-                          Theme.of(context).inputDecorationTheme.fillColor,
-                      contentPadding: const EdgeInsets.all(10.0),
-                      hintText: '    Type your message here.',
-                      hintStyle:
-                          const TextStyle(color: Colors.black, fontSize: 17)),
+                        // prefixIcon: Icon(Icons.search,
+                        //     color: Theme.of(context).iconTheme.color),
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
+                        fillColor:
+                            Theme.of(context).inputDecorationTheme.fillColor,
+                        contentPadding: const EdgeInsets.all(10.0),
+                        hintText: '    Type your message here.',
+                        hintStyle:
+                            const TextStyle(color: Colors.black, fontSize: 17)),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -149,14 +165,14 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
         actions: [
-          const Icon(Icons.call),
-          const SizedBox(
-            width: 10,
-          ),
-          InkWell(onTap: () {}, child: const Icon(Icons.video_call)),
-          const SizedBox(
-            width: 10,
-          )
+          // const Icon(Icons.call),
+          // const SizedBox(
+          //   width: 10,
+          // ),
+          // InkWell(onTap: () {}, child: const Icon(Icons.video_call)),
+          // const SizedBox(
+          //   width: 10,
+          // )
         ],
       ),
       body: Column(
@@ -164,7 +180,7 @@ class _ChatPageState extends State<ChatPage> {
           StreamBuilder(
             stream: firebaseFirestore
                 .collection("chat")
-                .doc(getChatId("MQtCWxSzxkgHwm5lJknkR3JZqtH3"))
+                .doc(getChatId(widget.id))
                 .collection("messages")
                 .orderBy('time', descending: true)
                 .snapshots(),
@@ -189,8 +205,7 @@ class _ChatPageState extends State<ChatPage> {
                               // var timestamp = data?['time'];
                               // var time = DateTime.fromMillisecondsSinceEpoch(timestamp);
                               // d12 = DateFormat('hh:mm a').format(time);
-                              return constants.myId ==
-                                      'MQtCWxSzxkgHwm5lJknkR3JZqtH3'
+                              return constants.myId != data?['senderid']
                                   ? Align(
                                       alignment: Alignment.centerLeft,
                                       child: Card(

@@ -35,6 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
           );
         } else {
           return FutureBuilder(
+<<<<<<< HEAD
             future: firebaseFirestore
                 .collection('users')
                 .doc(constants.myId)
@@ -45,6 +46,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     sathishshot) {
               return ListView(
                 children: [
+=======
+              future: firebaseFirestore
+                  .collection('users')
+                  .doc(constants.myId)
+                  .collection('posts')
+                  .get(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                      sathishshot) {
+                return ListView(children: [
+>>>>>>> merge
                   Stack(children: [
                     Container(
                       width: 1.sw,
@@ -91,7 +103,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ListTile(
                     leading: CircleAvatar(
                       radius: 40,
-                      backgroundImage: NetworkImage(dataa?['profileImage']),
+                      backgroundImage: NetworkImage(dataa?['profileImage'] ??
+                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
                     ),
                     title: Text(dataa?['name'],
                         style: const TextStyle(
@@ -127,84 +140,84 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ],
                       ),
-                      const Column(
-                        children: [
-                          Text(
-                            '50',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          ),
-                          Text(
-                            'Followers',
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 18),
-                          ),
-                        ],
-                      ),
-                      const Column(
-                        children: [
-                          Text(
-                            '100',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18),
-                          ),
-                          Text(
-                            'Following',
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 18),
-                          ),
-                        ],
-                      )
+                      // const Column(
+                      //   children: [
+                      //     Text(
+                      //       '50',
+                      //       style: TextStyle(
+                      //           color: Colors.black,
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 18),
+                      //     ),
+                      //     Text(
+                      //       'Followers',
+                      //       style: TextStyle(
+                      //           color: Colors.black54,
+                      //           fontWeight: FontWeight.normal,
+                      //           fontSize: 18),
+                      //     ),
+                      //   ],
+                      // ),
+                      //    const Column(
+                      //     children: [
+                      //       Text(
+                      //         '100',
+                      //         style: TextStyle(
+                      //             color: Colors.black,
+                      //             fontWeight: FontWeight.bold,
+                      //             fontSize: 18),
+                      //       ),
+                      //       Text(
+                      //         'Following',
+                      //         style: TextStyle(
+                      //             color: Colors.black54,
+                      //             fontWeight: FontWeight.normal,
+                      //             fontSize: 18),
+                      //       ),
+                      //     ],
+                      //   )
                     ],
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                          alignment: Alignment.center,
-                          width: 0.44.sw,
-                          height: 50,
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30.0),
-                            color: Colors.black,
-                          ),
-                          child: const Text(
-                            'Chat',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          )),
-                      Container(
-                          alignment: Alignment.center,
-                          width: 0.44.sw,
-                          height: 50,
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30.0),
-                            color: Colors.black,
-                          ),
-                          child: const Text(
-                            'Follow',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          )),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     Container(
+                  //         alignment: Alignment.center,
+                  //         width: 0.44.sw,
+                  //         height: 50,
+                  //         padding: const EdgeInsets.all(8),
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(30.0),
+                  //           color: Colors.black,
+                  //         ),
+                  //         child: const Text(
+                  //           'Chat',
+                  //           style: TextStyle(
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontSize: 16),
+                  //         )),
+                  //     Container(
+                  //         alignment: Alignment.center,
+                  //         width: 0.44.sw,
+                  //         height: 50,
+                  //         padding: const EdgeInsets.all(8),
+                  //         decoration: BoxDecoration(
+                  //           borderRadius: BorderRadius.circular(30.0),
+                  //           color: Colors.black,
+                  //         ),
+                  //         child: const Text(
+                  //           'Follow',
+                  //           style: TextStyle(
+                  //               color: Colors.white,
+                  //               fontWeight: FontWeight.bold,
+                  //               fontSize: 16),
+                  //         )),
+                  //   ],
+                  // ),
                   const ListTile(
                     leading: Text(
                       'Photos',
@@ -232,12 +245,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                 child: SizedBox(
                                   height: 0.20.sh,
                                   child: ListView.builder(
-                                    itemCount: sathishshot.data?.docs.length,
+                                    itemCount: (sathishshot.data?.docs.where(
+                                                (element) =>
+                                                    element.data()['type'] ==
+                                                    1) ??
+                                            [])
+                                        .length,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder:
                                         (BuildContext context, int index) {
-                                      var data =
-                                          sathishshot.data?.docs[index].data();
+                                      var data = sathishshot.data?.docs
+                                          .where((element) =>
+                                              element.data()['type'] == 1)
+                                          .toList()[index]
+                                          .data();
                                       return Card(
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -268,51 +289,51 @@ class _ProfilePageState extends State<ProfilePage> {
                               ));
                       }
                     },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const ListTile(
-                    leading: Text(
-                      'Videos',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18),
-                    ),
-                    trailing: Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Align(
-                    child: SizedBox(
-                      height: 0.30.sh,
-                      child: ListView.builder(
-                        itemCount: 3,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            child: Container(
-                              height: 0.30.sh,
-                              width: 0.40.sw,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(video[index]),
-                                      fit: BoxFit.cover),
-                                  borderRadius: BorderRadius.circular(15.0)),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
                   )
-                ],
-              );
-            },
-          );
+                  // const SizedBox(
+                  //   height: 15,
+                  // );
+                  //     const ListTile(
+                  //       leading: Text(
+                  //         'Videos',
+                  //         style: TextStyle(
+                  //             color: Colors.black,
+                  //             fontWeight: FontWeight.w500,
+                  //             fontSize: 18),
+                  //       ),
+                  //       trailing: Icon(
+                  //         Icons.keyboard_arrow_right,
+                  //         color: Colors.grey,
+                  //       ),
+                  //     ),
+                  //     Align(
+                  //       child: SizedBox(
+                  //         height: 0.30.sh,
+                  //         child: ListView.builder(
+                  //           itemCount: 3,
+                  //           scrollDirection: Axis.horizontal,
+                  //           itemBuilder: (BuildContext context, int index) {
+                  //             return Card(
+                  //               shape: RoundedRectangleBorder(
+                  //                   borderRadius: BorderRadius.circular(15.0)),
+                  //               child: Container(
+                  //                 height: 0.30.sh,
+                  //                 width: 0.40.sw,
+                  //                 decoration: BoxDecoration(
+                  //                     image: DecorationImage(
+                  //                         image: NetworkImage(video[index]),
+                  //                         fit: BoxFit.cover),
+                  //                     borderRadius: BorderRadius.circular(15.0)),
+                  //               ),
+                  //             );
+                  //           },
+                  //         ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // );
+                ]);
+              });
         }
       },
     ));

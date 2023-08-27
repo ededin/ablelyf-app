@@ -61,19 +61,21 @@ class _MessagePageState extends State<MessagePage> {
                         child: ListView.builder(
                           itemCount: snapshot.data?.docs.length,
                           itemBuilder: (BuildContext context, int index) {
-                            var dataa = snapshot.data?.docs[index];
+                            var dataa = snapshot.data?.docs[index].data();
 
                             return InkWell(
                               onTap: () {
                                 Get.to(ChatPage(
                                   name: dataa?['name'],
                                   email: dataa?['email'],
+                                  id: dataa?['id'],
                                 ));
                               },
                               child: ListTile(
                                 leading: CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(dataa?['profileImage']),
+                                  backgroundImage: NetworkImage(dataa?[
+                                          'profileImage'] ??
+                                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
                                 ),
                                 title: Text(
                                   dataa?['name'],
@@ -104,7 +106,6 @@ class _MessagePageState extends State<MessagePage> {
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.italic),
                       ));
-                
               }
             },
           )

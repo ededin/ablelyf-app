@@ -21,9 +21,9 @@ class _OnBoardingScreeenState extends State<OnBoardingScreeen> {
             const SizedBox(
               height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 23.0),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.only(right: 23.0),
+              child: Text(
                 'What would you like to say?',
                 style: TextStyle(
                     fontSize: 27,
@@ -82,7 +82,7 @@ class _OnBoardingScreeenState extends State<OnBoardingScreeen> {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => const BottomPage(),
+                    builder: (context) => const HomePage(),
                   ),
                 );
               },

@@ -8,8 +8,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  LoginControlller loginControlller = Get.put(LoginControlller());
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Image.asset('assets/logo/logo.png')),
             ),
             const Text(
-              LoginPageString.email,
+              LoginPageString.username,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
             ),
             SizedBox(
@@ -41,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                hintText: 'Enter Name',
+                hintText: 'Enter Email',
                 hintStyle: const TextStyle(color: Colors.grey),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -79,15 +86,29 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 0.03.sh,
             ),
-            Container(
-              width: 400,
-              height: 50,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.black, borderRadius: BorderRadius.circular(8)),
-              child: const Text(
-                LoginPageString.login,
-                style: TextStyle(fontSize: 15, color: Colors.white),
+            InkWell(
+              onTap: () {
+                if (usernameController.text == '' ||
+                    passwordController.text == '') {
+                  commonFunction.snackbar('Please Fill The Details');
+                } else {
+                  loginControlller.signinUser(
+                    name: usernameController.text,
+                    password: passwordController.text,
+                  );
+                }
+              },
+              child: Container(
+                width: 400,
+                height: 50,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(8)),
+                child: const Text(
+                  LoginPageString.login,
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
               ),
             ),
             SizedBox(

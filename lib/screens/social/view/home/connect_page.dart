@@ -42,11 +42,7 @@ class _ConnectPageState extends State<ConnectPage>
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: firebaseFirestore
-            .collection('users')
-            .doc(constants.myId)
-            .collection('posts')
-            .get(),
+        future: firebaseFirestore.collectionGroup('posts').get(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (!snapshot.hasData) {
@@ -54,19 +50,19 @@ class _ConnectPageState extends State<ConnectPage>
               child: CircularProgressIndicator(),
             );
           } else {
-            return Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: snapshot.data?.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var data = snapshot.data?.docs[index].data();
+            return (snapshot.data?.docs ?? []).isNotEmpty
+                ? Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: snapshot.data?.docs.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var data = snapshot.data?.docs[index].data();
 
-                        return (snapshot.data?.docs ?? []).isNotEmpty
-                            ? Column(
+                              return Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const ListTile(
@@ -147,19 +143,19 @@ class _ConnectPageState extends State<ConnectPage>
                                     ),
                                   )
                                 ],
-                              )
-                            : const Center(
-                                child: Text(
-                                'No Posts Found',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.italic),
-                              ));
-                      }),
-                )
-              ],
-            );
+                              );
+                            }),
+                      )
+                    ],
+                  )
+                : const Center(
+                    child: Text(
+                    'No Posts Found',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.italic),
+                  ));
           }
         },
       ),

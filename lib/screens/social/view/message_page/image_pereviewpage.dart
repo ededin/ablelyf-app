@@ -5,8 +5,9 @@ import 'package:dio/dio.dart';
 import '../../../../ablelyf.dart';
 
 class ImagePreview extends StatefulWidget {
-  const ImagePreview({super.key, this.image});
+  const ImagePreview({super.key, this.image, required this.id});
   final File? image;
+  final String id;
 
   @override
   State<ImagePreview> createState() => _ImagePreviewState();
@@ -47,7 +48,7 @@ class _ImagePreviewState extends State<ImagePreview> {
                 decoration: InputDecoration(
                   suffixIcon: InkWell(
                     onTap: () {
-                      uploadfunc(widget.image!);
+                      uploadfunc(widget.image!, widget.id);
                     },
                     child: const Icon(
                       Icons.send,
@@ -84,7 +85,7 @@ class _ImagePreviewState extends State<ImagePreview> {
     );
   }
 
-  uploadfunc(File image) async {
+  uploadfunc(File image, String id) async {
     List<int> imagebytes = image.readAsBytesSync();
     print('IMAGEBYTES: ${imagebytes}');
     if (imagebytes.isNotEmpty) {
@@ -95,13 +96,13 @@ class _ImagePreviewState extends State<ImagePreview> {
       dio.post(
         '/',
         data: {
-          'chatId': getChatId('MQtCWxSzxkgHwm5lJknkR3JZqtH3'),
+          'chatId': getChatId(id),
           'type': 1,
           'userId': constants.myId,
           'image': base64
         },
       );
-      Get.offAll(const ChatPage());
+      Get.back();
     }
   }
 }

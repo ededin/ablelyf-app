@@ -185,6 +185,17 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.6"
+<<<<<<< HEAD
+=======
+  date_format:
+    dependency: "direct main"
+    description:
+      name: date_format
+      sha256: "8e5154ca363411847220c8cbc43afcf69c08e8debe40ba09d57710c25711760c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
+>>>>>>> merge
   dio:
     dependency: "direct main"
     description:
@@ -221,10 +232,17 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
+<<<<<<< HEAD
       sha256: "21145c9c268d54b1f771d8380c195d2d6f655e0567dc1ca2f9c134c02c819e0a"
       url: "https://pub.dev"
     source: hosted
     version: "5.3.3"
+=======
+      sha256: bdfa035a974a0c080576c4c8ed01cdf9d1b406a04c7daa05443ef0383a97bedc
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.4"
+>>>>>>> merge
   file_selector_linux:
     dependency: transitive
     description:
@@ -349,7 +367,11 @@ packages:
       sha256: "2118df84ef0c3ca93f96123a616ae8540879991b8b57af2f81b76a7ada49b2a4"
       url: "https://pub.dev"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.2"
+=======
+    version: "2.0.1"
+>>>>>>> merge
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -363,6 +385,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_tts:
+    dependency: "direct main"
+    description:
+      name: flutter_tts
+      sha256: "679192274aef74c9fda70dfe8d6f431de118aee91ef1eb415bba361d78a9cd08"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.7.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -436,10 +466,17 @@ packages:
     dependency: transitive
     description:
       name: image_picker_ios
+<<<<<<< HEAD
       sha256: b3e2f21feb28b24dd73a35d7ad6e83f568337c70afab5eabac876e23803f264b
       url: "https://pub.dev"
     source: hosted
     version: "0.8.8"
+=======
+      sha256: bee3b7c7e6266a37fb1bfdc275bc60427029d447205d44933aac130fbb9d3330
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.8+1"
+>>>>>>> merge
   image_picker_linux:
     dependency: transitive
     description:
@@ -623,6 +660,17 @@ packages:
       sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
       url: "https://pub.dev"
     source: hosted
+<<<<<<< HEAD
+=======
+    version: "4.2.4"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
+      url: "https://pub.dev"
+    source: hosted
+>>>>>>> merge
     version: "3.2.1"
   rxdart:
     dependency: transitive

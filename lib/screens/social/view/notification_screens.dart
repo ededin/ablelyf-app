@@ -11,18 +11,18 @@ class _NotificationPageState extends State<NotificationPage> {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   List<String> text = ['Today', 'This week', 'Earlier', 'Tommorow'];
-  List<IconData> icon = [
-    Icons.heart_broken,
-    Icons.share,
-    Icons.message,
-    Icons.share_sharp
-  ];
-  List<String> message = [
-    'Suagn & 10 others liked your post',
-    'sathish & 10 others liked your post',
-    'sathish & 10 others comment your post',
-    'sugan & 10 others comment your post',
-  ];
+  // List<IconData> icon = [
+  //   Icons.heart_broken,
+  //   Icons.share,
+  //   Icons.message,
+  //   Icons.share_sharp
+  // ];
+  // List<String> message = [
+  //   'Suagn & 10 others liked your post',
+  //   'sathish & 10 others liked your post',
+  //   'sathish & 10 others comment your post',
+  //   'sugan & 10 others comment your post',
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,16 +75,16 @@ class _NotificationPageState extends State<NotificationPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15.0),
-                                        child: Text(
-                                          text[index],
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
+                                      // Padding(
+                                      //   padding:
+                                      //       const EdgeInsets.only(left: 15.0),
+                                      //   child: Text(
+                                      //     text[index],
+                                      //     style: const TextStyle(
+                                      //         color: Colors.black,
+                                      //         fontWeight: FontWeight.bold),
+                                      //   ),
+                                      // ),
                                       const SizedBox(
                                         height: 10,
                                       ),
@@ -100,41 +100,18 @@ class _NotificationPageState extends State<NotificationPage> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            const Icon(Icons.heart_broken),
+                                            // const Icon(Icons.heart_broken),
                                             Text(data?['content']),
                                             CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  data?['profileImage']),
+                                              backgroundImage: NetworkImage(data?[
+                                                      'profileImage'] ??
+                                                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
                                             )
                                           ],
                                         ),
                                       ),
                                       const SizedBox(
                                         height: 10,
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 8.0, horizontal: 10.0),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Icon(icon[index]),
-                                            Text(message[index]),
-                                            CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  data?['profileImage']),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
                                       ),
                                     ],
                                   );
@@ -145,13 +122,13 @@ class _NotificationPageState extends State<NotificationPage> {
                     )
                   : const Center(
                       child: Text(
-                      'No Notification Found',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.italic),
-                    ));
-              ;
+                        'No Notification Found',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FontStyle.italic),
+                      ),
+                    );
             }
           },
         ));
