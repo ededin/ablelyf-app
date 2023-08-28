@@ -55,24 +55,59 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.only(top: 15),
                   child: ListView(
                     children: [
-                      ListTile(
-                        leading: CircleAvatar(
-                          radius: 40,
-                          backgroundImage: NetworkImage(dataa?[
-                                  'profileImage'] ??
-                              "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
-                        ),
-                        title: Text(dataa?['name'],
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20)),
-                        subtitle: const Text(
-                          'Software Engineer',
-                          style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            color: Colors.black45,
-                            fontSize: 18,
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 30,
                           ),
-                        ),
+                          InkWell(
+                            onTap: () {
+                              profileBottom(context);
+                            },
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  image: DecorationImage(
+                                      image: CachedNetworkImageProvider(dataa?[
+                                              'profileImage'] ??
+                                          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"),
+                                      fit: BoxFit.cover)),
+                              child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: const Icon(
+                                    Icons.camera_alt,
+                                    size: 18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(dataa?['name'],
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20)),
+                              const Text('Software Engineer',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.black45,
+                                      fontSize: 18)),
+                            ],
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 20,
