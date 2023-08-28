@@ -20,7 +20,7 @@ class LoginControlller extends GetxController {
         await appSharedPreference.setString(
             SharedPreferenceKeys.userId, credential.user!.uid);
 
-        constants.myId = credential.user!.uid;
+        // constants.myId = credential.user!.uid;
 
         var user = FirebaseFirestore.instance
             .collection('users')
@@ -57,7 +57,7 @@ class LoginControlller extends GetxController {
           .signInWithEmailAndPassword(email: name, password: password);
       print('CREDENTIAL: ${credential}');
 
-      constants.myId = credential.user!.uid;
+      // constants.myId = credential.user!.uid;
       print('CONSTANTS.MYID: ${constants.myId}');
       if (credential.user?.uid != null) {
         Get.to(const ModuleSelect());

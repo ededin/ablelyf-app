@@ -28,17 +28,17 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: const Icon(
+          /* leading: const Icon(
             Icons.arrow_back,
             color: Colors.black,
-          ),
+          ), */
           centerTitle: true,
           title: const Text(
             'Notification',
             style: TextStyle(
                 color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          actions: [
+          /* actions: [
             IconButton(
                 onPressed: () {},
                 icon: const Icon(
@@ -46,7 +46,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   color: Colors.black,
                   size: 25,
                 ))
-          ],
+          ], */
         ),
         body: FutureBuilder(
           future: firebaseFirestore.collection('notification').get(),
@@ -92,10 +92,11 @@ class _NotificationPageState extends State<NotificationPage> {
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 8.0, horizontal: 10.0),
                                         decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30.0),
-                                            border: Border.all(
-                                                color: Colors.black)),
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          border:
+                                              Border.all(color: Colors.black),
+                                        ),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
@@ -103,9 +104,10 @@ class _NotificationPageState extends State<NotificationPage> {
                                             // const Icon(Icons.heart_broken),
                                             Text(data?['content']),
                                             CircleAvatar(
-                                              backgroundImage: NetworkImage(data?[
-                                                      'profileImage'] ??
-                                                  'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'),
+                                              backgroundImage: NetworkImage(
+                                                data?['profileImage'] ??
+                                                    constants.profileImage,
+                                              ),
                                             )
                                           ],
                                         ),

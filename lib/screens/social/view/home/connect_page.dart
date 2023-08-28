@@ -14,6 +14,10 @@ class _ConnectPageState extends State<ConnectPage>
 
   @override
   void initState() {
+    firebaseFirestore
+        .collectionGroup('posts')
+        .orderBy('time', descending: true)
+        .get();
     // tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -22,9 +26,10 @@ class _ConnectPageState extends State<ConnectPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: const Text(
-          'NewsFeed',
+          'News Feed',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
         ),
@@ -42,7 +47,10 @@ class _ConnectPageState extends State<ConnectPage>
         centerTitle: true,
       ),
       body: FutureBuilder(
-        future: firebaseFirestore.collectionGroup('posts').get(),
+        future: firebaseFirestore
+            .collectionGroup('posts')
+            .orderBy('time', descending: true)
+            .get(),
         builder: (BuildContext context,
             AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (!snapshot.hasData) {
@@ -58,93 +66,47 @@ class _ConnectPageState extends State<ConnectPage>
                       ),
                       Expanded(
                         child: ListView.builder(
-                            itemCount: snapshot.data?.docs.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              var data = snapshot.data?.docs[index].data();
+                          itemCount: snapshot.data?.docs.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var data = snapshot.data?.docs[index].data();
 
-                              return Column(
+                            return Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const ListTile(
+                                  ListTile(
                                     leading: CircleAvatar(
                                       radius: 30,
                                       backgroundImage: NetworkImage(
-                                          'https://i.pinimg.com/564x/ce/ef/76/ceef76224c4de5c2255e42f6c733abc5.jpg'),
+                                          data?['profile'] ??
+                                              constants.profileImage),
                                     ),
                                     title: Text(
-                                      'SATHISH',
+                                      data?['name'] ?? "",
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    subtitle: Text(
-                                      'INDIA,Pollachi',
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                    trailing: Text(
-                                      'Posted 5',
-                                      style: TextStyle(
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w500),
-                                    ),
+                                    subtitle: Text(data?['caption'] ?? ''),
                                   ),
                                   Container(
                                     width: 0.90.sw,
                                     height: 0.65.sh,
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                        image: DecorationImage(
-                                            image: CachedNetworkImageProvider(
-                                                data!['media']),
-                                            fit: BoxFit.cover)),
-                                  ),
-                                  Card(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25.0)),
-                                    child: Container(
-                                      height: 50,
-                                      width: 0.90.sw,
-                                      decoration: BoxDecoration(
-                                          border:
-                                              Border.all(color: Colors.black45),
-                                          borderRadius:
-                                              BorderRadius.circular(25.0),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ListView(
-                                            children: [Text(data['caption'])]),
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      image: DecorationImage(
+                                        image: CachedNetworkImageProvider(
+                                            data!['media']),
+                                        fit: BoxFit.cover,
                                       ),
-                                      // const Row(
-                                      //   children: [
-                                      //     SizedBox(
-                                      //       width: 10,
-                                      //     ),
-                                      //     CircleAvatar(
-                                      //       backgroundImage: NetworkImage(
-                                      //           'https://images5.alphacoders.com/404/404490.jpg'),
-                                      //     ),
-                                      //     CircleAvatar(
-                                      //       backgroundImage: NetworkImage(
-                                      //           'https://images5.alphacoders.com/404/404490.jpg'),
-                                      //     ),
-                                      // Text(
-                                      //   'Join the',
-                                      //   style:
-                                      //       TextStyle(color: Colors.grey),
-                                      // ),
-                                      // SizedBox(
-                                      //   width: 10,
-                                      // ),
-                                      //   ],
-                                      // ),
                                     ),
-                                  )
+                                  ),
                                 ],
-                              );
-                            }),
+                              ),
+                            );
+                          },
+                        ),
                       )
                     ],
                   )
