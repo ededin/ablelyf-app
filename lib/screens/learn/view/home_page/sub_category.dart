@@ -1,34 +1,30 @@
 import '../../../../ablelyf.dart';
 
 class SubCategory extends StatefulWidget {
-  const SubCategory({super.key, this.userId, required this.topic});
+  const SubCategory({
+    super.key,
+    required this.categoryId,
+    required this.selectedWord,
+  });
 
-  final String? userId;
-  final String topic;
+  final String categoryId;
+
+  final void Function(String?) selectedWord;
 
   @override
   State<SubCategory> createState() => _SubCategoryState();
 }
 
 class _SubCategoryState extends State<SubCategory> {
-  final FlutterTts flutterTts = FlutterTts();
   String text = '';
+
   @override
   void initState() {
-    flutterTts.setLanguage("en-US");
     super.initState();
-  }
-
-  Future<void> speak() async {
-    await flutterTts.setVolume(0.5);
-    await flutterTts.setPitch(1.0);
-    await flutterTts.setSpeechRate(0.4);
-    await flutterTts.speak(text);
   }
 
   @override
   void dispose() {
-    flutterTts.stop();
     super.dispose();
   }
 
@@ -36,21 +32,22 @@ class _SubCategoryState extends State<SubCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.topic),
-        centerTitle: true,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              size: 20,
-            )),
+          onPressed: () {
+            widget.selectedWord.call(null);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            size: 20,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection('learnPharses')
-              .where('category', isEqualTo: widget.userId)
+              .where('category', isEqualTo: widget.categoryId)
               .get(),
           builder: (context, snapshot) {
             if (snapshot.data == null) {
@@ -66,7 +63,10 @@ class _SubCategoryState extends State<SubCategory> {
             }
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 5, mainAxisSpacing: 5, crossAxisCount: 3),
+                crossAxisSpacing: 5,
+                mainAxisSpacing: 5,
+                crossAxisCount: 3,
+              ),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -74,16 +74,18 @@ class _SubCategoryState extends State<SubCategory> {
                   child: InkWell(
                     onTap: () {
                       text = snapshot.data!.docs[index].data()['pharse'];
-                      speak();
+                      widget.selectedWord.call(text);
                     },
                     child: Container(
                       height: 80,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          color: Colors.blueGrey[200],
-                          borderRadius: BorderRadius.circular(10)),
+                        color: Colors.blueGrey[200],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Text(
                         '${snapshot.data!.docs[index].data()['pharse']}',
+                        textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 18),
                       ),
                     ),
