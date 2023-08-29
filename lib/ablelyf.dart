@@ -16,3 +16,6 @@ export 'package:date_format/date_format.dart';
 export 'package:flutter_tts/flutter_tts.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:file_picker/file_picker.dart';
+export 'package:speech_to_text/speech_to_text.dart';
+export 'package:speech_to_text/speech_recognition_result.dart';
+export 'package:picovoice_flutter/picovoice_manager.dart';
