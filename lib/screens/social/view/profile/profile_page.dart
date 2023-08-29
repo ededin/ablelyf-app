@@ -1,6 +1,5 @@
 import 'package:newp/screens/social/view/profile/sathish.dart';
-import 'package:newp/screens/social/view/profile/speech.dart';
-import 'package:newp/screens/social/view/profile/voice.dart';
+
 
 import '../../../../ablelyf.dart';
 
