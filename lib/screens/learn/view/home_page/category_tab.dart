@@ -34,6 +34,7 @@ class _CategoryTabState extends State<CategoryTab> {
                   child: SizedBox(
                     height: 80,
                     child: ListTile(
+                      contentPadding: EdgeInsets.all(10.0),
                       onTap: () {
                         widget.onTap.call(snapshot.data!.docs[index]['id']);
                         // Get.to(() {
@@ -50,6 +51,11 @@ class _CategoryTabState extends State<CategoryTab> {
                       title: Text(
                         '${snapshot.data!.docs[index]['name']}',
                         style: const TextStyle(fontSize: 18),
+                      ),
+                      trailing: CircleAvatar(
+                        radius: 25.0,
+                        backgroundImage:
+                            NetworkImage(snapshot.data!.docs[index]['image']),
                       ),
                     ),
                   ),

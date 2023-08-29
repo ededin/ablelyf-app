@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     flutterTts.setLanguage("en-US");
-    controller = TabController(length: 3, vsync: this);
+    controller = TabController(length: 2, vsync: this);
     controller?.addListener(() {
       setState(() {
         selectedCategoryId = null;
@@ -193,6 +193,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             height: 17,
           ),
           TabBar(
+              dividerColor: Colors.transparent,
               isScrollable: true,
               unselectedLabelColor: Colors.black45,
               labelColor: Colors.black,
@@ -200,10 +201,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               indicatorColor: Colors.black,
               indicatorWeight: 1.5,
               tabs: const [
-                Text(
-                  'Browse',
-                  style: TextStyle(fontSize: 20),
-                ),
+                // Text(
+                //   '',
+                //   style: TextStyle(fontSize: 20),
+                // ),
                 Text(
                   'Categories',
                   style: TextStyle(fontSize: 20),
@@ -217,7 +218,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: TabBarView(
               controller: controller,
               children: [
-                const BrowsePage(),
+                // const BrowsePage(),
                 if (selectedCategoryId == null)
                   CategoryTab(
                     onTap: (id) {
@@ -240,7 +241,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       });
                     },
                   ),
-                Container(),
+                Librarypage(
+                  ontap: (word) {
+                    speak(word);
+                  },
+                )
               ],
             ),
           )
