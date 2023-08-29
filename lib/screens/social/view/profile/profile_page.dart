@@ -1,3 +1,6 @@
+import 'package:newp/screens/social/view/profile/sathish.dart';
+
+
 import '../../../../ablelyf.dart';
 
 class ProfilePage extends StatefulWidget {
