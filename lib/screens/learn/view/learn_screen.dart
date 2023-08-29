@@ -29,7 +29,7 @@ class _AbletoLearnState extends State<AbletoLearn> {
           ),
           const SizedBox(height: 15),
           const Text(
-            'Talk2Go',
+            'Able To Talk',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -38,7 +38,7 @@ class _AbletoLearnState extends State<AbletoLearn> {
           ),
           const SizedBox(height: 10),
           const Text(
-            'Find the perfect words',
+            'Autism',
             style: TextStyle(
                 color: Colors.black26,
                 fontWeight: FontWeight.w700,
@@ -73,7 +73,7 @@ class _AbletoLearnState extends State<AbletoLearn> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const OnBoardingScreeen(),
+                      builder: (context) => const HomePage(),
                     ),
                   );
                 },

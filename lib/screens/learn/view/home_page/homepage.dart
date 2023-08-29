@@ -244,6 +244,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 Librarypage(
                   ontap: (word) {
                     speak(word);
+
+                    sentence.add(word);
                   },
                 )
               ],

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:newp/ablelyf.dart';
 
 class Librarypage extends StatefulWidget {
@@ -121,6 +120,7 @@ class _LibrarypageState extends State<Librarypage> {
                     .collection('learnwords')
                     .add({'word': textEditingController.text});
             Get.back();
+            setState(() {});
           },
           child: Container(
             padding: const EdgeInsets.all(15.0),
