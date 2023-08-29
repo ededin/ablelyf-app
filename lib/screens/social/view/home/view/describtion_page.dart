@@ -7,7 +7,7 @@ import '../../../../../ablelyf.dart';
 class Describtion extends StatefulWidget {
   const Describtion({super.key, required this.image});
 
-  final File? image;
+  final File image;
 
   @override
   State<Describtion> createState() => _DescribtionState();
@@ -16,91 +16,120 @@ class Describtion extends StatefulWidget {
 class _DescribtionState extends State<Describtion> {
   TextEditingController textEditingController = TextEditingController();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  var fire;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            'New Post',
-            style: TextStyle(
-                color: Colors.white, fontSize: 19, fontWeight: FontWeight.w500),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'New Post',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: InkWell(
-                onTap: () async {
-                  print('object');
-                  uploadfunc(widget.image!);
-                },
-                child: const Text(
-                  'Upload',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.lightBlue,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            )
-          ],
         ),
-        body: Column(
-          children: [
-            if (widget.image != null)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.file(
-                    //to show image, you type like this.
-                    File(widget.image!.path),
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width,
-                    height: 300,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20),
+            child: InkWell(
+              onTap: () async {
+                uploadfunc(widget.image);
+              },
+              child: const Text(
+                'Upload',
+                style: TextStyle(
+                  color: Colors.lightBlue,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.file(
+                          //to show image, you type like this.
+                          widget.image,
+                          fit: BoxFit.cover,
+                          // width: MediaQuery.of(context).size.width,
+                          // height: 300,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: textEditingController,
+                      minLines: 2,
+                      maxLines: 5,
+                      cursorColor: Colors.lightBlue,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontStyle: FontStyle.normal,
+                      ),
+                      keyboardType: TextInputType.multiline,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey.withOpacity(0.5)),
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey.withOpacity(0.5)),
+                        ),
+                        hintText: 'Description',
+                        hintStyle: TextStyle(color: Colors.white),
+                        border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.grey.withOpacity(0.5)),
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            const SizedBox(
-              height: 15,
             ),
-            TextField(
-              controller: textEditingController,
-              minLines: 2,
-              maxLines: 5,
-              cursorColor: Colors.lightBlue,
-              style: const TextStyle(
-                  color: Colors.white, fontStyle: FontStyle.normal),
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlue),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlue),
-                ),
-                hintText: 'description',
-                hintStyle: TextStyle(color: Colors.white),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.lightBlue),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                ),
+          ),
+          if (loading)
+            DecoratedBox(
+              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3)),
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
-            ),
-          ],
-        ));
+            )
+        ],
+      ),
+    );
   }
 
   uploadfunc(File image) async {
+    setState(() {
+      loading = true;
+    });
     List<int> imagebytes = image.readAsBytesSync();
     print('IMAGEBYTES: $imagebytes');
     if (imagebytes.isNotEmpty) {

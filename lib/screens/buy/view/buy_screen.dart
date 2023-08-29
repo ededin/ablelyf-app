@@ -12,15 +12,19 @@ class AbleToBuy extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              FutureBuilder(
-                  future: FirebaseFirestore.instance
-                      .collection('buyCategory')
-                      .get(),
-                  builder: (context, snapshot) {
-                    return CarouselSlider(
+          child: FutureBuilder(
+              future:
+                  FirebaseFirestore.instance.collection('buyCategory').get(),
+              builder: (context, snapshot) {
+                if (snapshot.data == null) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    CarouselSlider(
                       options: CarouselOptions(
                         height: 200,
                         viewportFraction: 0.8,
@@ -38,91 +42,102 @@ class AbleToBuy extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               )),
-                    );
-                  }),
-              const Text(
-                '\n\nFeatured Products',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 300,
-                child: FutureBuilder(
-                    future:
-                        FirebaseFirestore.instance.collection('buytypes').get(),
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data!.docs.length,
-                          itemBuilder: (context, index) {
-                            return ProductCard(
-                              image: snapshot.data!.docs[index]
-                                  ['products_image'],
-                              name: snapshot.data!.docs[index]['products_type'],
-                              price:
-                                  '\$ ${snapshot.data!.docs[index]['products_price']}',
-                              description:
-                                  'Inspired by recent successes in integrating semantic topics into this task, this paper develops a plug-and-play hierarchical-topic-guided image paragraph generation framework, which couples a visual extractor with a deep topic model to guide the learning of a language model.',
-                            );
-                          });
-                    }),
-              ),
-              const Text(
-                'Categories',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
-              SizedBox(
-                height: 150,
-                child: FutureBuilder(
-                    future: FirebaseFirestore.instance
-                        .collection('buyCategory')
-                        .get(),
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Align(
-                            alignment: Alignment.topCenter,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                onTap: () {
-                                  Get.to(ProductsList(
-                                    category: snapshot.data!.docs[index].data(),
-                                  ));
-                                },
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                      color: constants.themeColor,
-                                      borderRadius: BorderRadius.circular(10)),
+                    ),
+                    const Text(
+                      '\n\nFeatured Products',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 300,
+                      child: FutureBuilder(
+                          future: FirebaseFirestore.instance
+                              .collection('buytypes')
+                              .get(),
+                          builder: (context, snapshot) {
+                            if (snapshot.data == null) {
+                              return const SizedBox();
+                            }
+
+                            return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: (context, index) {
+                                  Map<String, dynamic> res =
+                                      snapshot.data!.docs[index].data();
+                                  return ProductCard(
+                                    image: res['products_image'],
+                                    name: res['products_type'],
+                                    price: '\$ ${res['products_price']}',
+                                    description:
+                                        'Inspired by recent successes in integrating semantic topics into this task, this paper develops a plug-and-play hierarchical-topic-guided image paragraph generation framework, which couples a visual extractor with a deep topic model to guide the learning of a language model.',
+                                  );
+                                });
+                          }),
+                    ),
+                    const Text(
+                      'Categories',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 150,
+                      child: FutureBuilder(
+                          future: FirebaseFirestore.instance
+                              .collection('buyCategory')
+                              .get(),
+                          builder: (context, snapshot) {
+                            if (snapshot.data == null) {
+                              return const SizedBox();
+                            }
+                            return ListView.builder(
+                              itemCount: snapshot.data!.docs.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Align(
+                                  alignment: Alignment.topCenter,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      snapshot.data!.docs[index].data()['name'],
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
+                                    child: InkWell(
+                                      onTap: () {
+                                        Get.to(ProductsList(
+                                          category:
+                                              snapshot.data!.docs[index].data(),
+                                        ));
+                                      },
+                                      child: DecoratedBox(
+                                        decoration: BoxDecoration(
+                                            color: constants.themeColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            snapshot.data!.docs[index]
+                                                .data()['name'],
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }),
-              ),
-            ],
-          ),
+                                );
+                              },
+                            );
+                          }),
+                    ),
+                  ],
+                );
+              }),
         ),
       ),
     );

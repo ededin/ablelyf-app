@@ -427,12 +427,12 @@ class _BrowsePageState extends State<BrowsePage> {
                             //   });
                             // }
 
-                            Get.to(() {
-                              return SubCategory(
-                                userId: categoriesListId[i],
-                                topic: categoriesList[i],
-                              );
-                            });
+                            // Get.to(() {
+                            //   return SubCategory(
+                            //     categoryId: categoriesListId[i],
+                            //     categoryName: categoriesList[i],
+                            //   );
+                            // });
                           },
                           child: Container(
                             height: 80,

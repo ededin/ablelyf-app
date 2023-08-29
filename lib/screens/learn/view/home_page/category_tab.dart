@@ -1,7 +1,8 @@
 import '../../../../ablelyf.dart';
 
 class CategoryTab extends StatefulWidget {
-  const CategoryTab({super.key});
+  final void Function(String) onTap;
+  const CategoryTab({super.key, required this.onTap});
 
   @override
   State<CategoryTab> createState() => _CategoryTabState();
@@ -34,12 +35,13 @@ class _CategoryTabState extends State<CategoryTab> {
                     height: 80,
                     child: ListTile(
                       onTap: () {
-                        Get.to(() {
-                          return SubCategory( 
-                            userId: snapshot.data!.docs[index]['id'],
-                            topic: snapshot.data!.docs[index]['name'],
-                          );
-                        });
+                        widget.onTap.call(snapshot.data!.docs[index]['id']);
+                        // Get.to(() {
+                        //   return SubCategory(
+                        //     userId: snapshot.data!.docs[index]['id'],
+                        //     topic: snapshot.data!.docs[index]['name'],
+                        //   );
+                        // });
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
