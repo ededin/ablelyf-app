@@ -1,3 +1,7 @@
+import 'package:newp/screens/social/view/profile/sathish.dart';
+import 'package:newp/screens/social/view/profile/speech.dart';
+import 'package:newp/screens/social/view/profile/voice.dart';
+
 import '../../../../ablelyf.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -55,7 +59,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             fit: BoxFit.cover),
                       ),
                       child: InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(MyApp());
+                        },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Align(
