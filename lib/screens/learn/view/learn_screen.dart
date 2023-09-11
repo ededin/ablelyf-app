@@ -1,3 +1,5 @@
+import 'package:newp/screens/learn/view/talk_intro_page.dart';
+
 import '../../../ablelyf.dart';
 
 class AbletoLearn extends StatefulWidget {
@@ -73,7 +75,7 @@ class _AbletoLearnState extends State<AbletoLearn> {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => const TalkIntroPage(),
                     ),
                   );
                 },

@@ -26,7 +26,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
       message: "Able to Talk",
       image: ModulesImages.talk,
       commands: 'talk',
-      page: const AbleToTalk(),
+      page: const AbletoLearn(),
     ),
     Pharses(
       message: "Able to Express",
@@ -56,7 +56,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
       message: "Able to Learn",
       image: ModulesImages.learn,
       commands: "learn",
-      page: const AbletoLearn(),
+      page: const AbleToTalk(),
     ),
     Pharses(
       message: "Able To Socialize",
@@ -75,7 +75,6 @@ class _ModuleSelectState extends State<ModuleSelect> {
 
   @override
   void initState() {
-
     flutterTts.setLanguage("en-US");
 
     wordFound = false;
@@ -193,7 +192,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
                       switch (i) {
                         case 0:
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const AbleToTalk()));
+                              builder: (context) => const AbletoLearn()));
                           break;
                         case 1:
                           Navigator.of(context).push(MaterialPageRoute(
@@ -214,7 +213,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
 
                         case 5:
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const AbletoLearn()));
+                              builder: (context) => const AbleToTalk()));
                           break;
                       }
                     },
