@@ -1,4 +1,5 @@
 import 'package:newp/ablelyf.dart';
+import 'package:newp/screens/learn/view/pecs_home.dart';
 
 class CommunicationHome extends StatelessWidget {
   const CommunicationHome({super.key});
@@ -38,7 +39,7 @@ class CommunicationHome extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                // Get.to(() => const EdumoveHome());
+                Get.to(() => const PECSHome());
               },
               child: Container(
                 width: 0.4.sw,
