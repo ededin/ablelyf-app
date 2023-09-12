@@ -1,16 +1,75 @@
 import 'package:newp/ablelyf.dart';
 
 class PECSCards extends StatelessWidget {
-  final String category;
   final String id;
-  const PECSCards({super.key, required this.category, required this.id});
+  final void Function(String, String) onTap;
+  const PECSCards({super.key, required this.id, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> cards = [
+      {
+        "name": "Bacon",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,144",
+        "category": id,
+      },
+      {
+        "name": "Muffin",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,408",
+        "category": id,
+      },
+      {
+        "name": "Pancakes",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,148",
+        "category": id,
+      },
+      {
+        "name": "Fried Egg",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,146",
+        "category": id,
+      },
+      {
+        "name": "Waffles",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,355",
+        "category": id,
+      },
+      {
+        "name": "Toast",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,149",
+        "category": id,
+      },
+      {
+        "name": "Boiled Egg",
+        "image":
+            "http://www.mypecs.com/ImageServer/ImageService.svc/GetPecsCardImage/41,147",
+        "category": id,
+      },
+    ];
     return Scaffold(
-      appBar: AppBar(
-        title: Text(category),
-      ),
+      // appBar: AppBar(
+      //   title: Text(category),
+      // ),
+      /*  floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          for (Map<String, dynamic> element in cards) {
+            FirebaseFirestore.instance.collection('pecsCard').add(element).then(
+                  (value) => FirebaseFirestore.instance
+                      .collection('pecsCard')
+                      .doc(value.id)
+                      .update(
+                    {"id": value.id},
+                  ),
+                );
+          }
+        },
+      ), */
       body: FutureBuilder(
           future: FirebaseFirestore.instance
               .collection('pecsCard')
@@ -32,8 +91,22 @@ class PECSCards extends StatelessWidget {
                   crossAxisSpacing: 10,
                 ),
                 itemBuilder: (context, index) {
-                  return CachedNetworkImage(
-                    imageUrl: snapshot.data?.docs[index].data()['image'],
+                  return InkWell(
+                    onTap: () {
+                      Get.dialog(
+                        Dialog(
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                snapshot.data?.docs[index].data()['image'],
+                          ),
+                        ),
+                      );
+                      onTap.call(snapshot.data?.docs[index].data()['image'],
+                          snapshot.data?.docs[index].data()['name']);
+                    },
+                    child: CachedNetworkImage(
+                      imageUrl: snapshot.data?.docs[index].data()['image'],
+                    ),
                   );
                 },
               ),
