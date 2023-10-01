@@ -1,4 +1,4 @@
-export 'package:flutter/material.dart';
+export 'package:flutter/material.dart' hide Ink;
 export 'package:get/get.dart';
 export 'utils/utils.dart';
 export 'dart:convert';
@@ -18,4 +18,9 @@ export 'package:image_picker/image_picker.dart';
 export 'package:file_picker/file_picker.dart';
 export 'package:speech_to_text/speech_to_text.dart';
 export 'package:speech_to_text/speech_recognition_result.dart';
-export 'package:picovoice_flutter/picovoice_manager.dart';
+export 'package:webview_flutter/webview_flutter.dart';
+export 'package:flutter/services.dart';
+export 'package:camera/camera.dart';
+export 'package:google_ml_kit/google_ml_kit.dart';
+
+// export 'package:picovoice_flutter/picovoice_manager.dart';

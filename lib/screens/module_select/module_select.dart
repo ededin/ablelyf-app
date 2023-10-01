@@ -12,7 +12,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
 
   final FlutterTts flutterTts = FlutterTts();
 
-  PicovoiceManager? _picovoiceManager;
+  // PicovoiceManager? _picovoiceManager;
   final String accessKey =
       "7U7m5Sq3m7FpFAnCQr2fu7Z7FoNYPYLy4LzpmOxngufx1yx3EZyveg==";
   bool _speechEnabled = false;
@@ -85,7 +85,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
   }
 
   void _initSpeech() async {
-    _picovoiceManager = await PicovoiceManager.create(
+    /*   _picovoiceManager = await PicovoiceManager.create(
       accessKey,
       'assets/hey_eva.ppn',
       () {
@@ -126,7 +126,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
           _picovoiceManager?.start();
         }
       },
-    );
+    ); */
     setState(() {});
   }
 
@@ -142,7 +142,7 @@ class _ModuleSelectState extends State<ModuleSelect> {
   /// listen method.
   void _stopListening() async {
     await _speechToText.stop();
-    _picovoiceManager?.start();
+    // _picovoiceManager?.start();
 
     setState(() {});
   }

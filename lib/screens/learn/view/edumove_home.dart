@@ -3,19 +3,27 @@ import 'package:newp/ablelyf.dart';
 List<String> title = [
   "GB - ABA",
   "VS - ER",
-  "VT - SLP",
-  "IEG - OF",
-  "GC - SST",
-  "SI - MT",
+  "MS"
+  // "VT - SLP",
+  // "IEG - OF",
+  // "GC - SST",
+  // "SI - MT",
 ];
 
 List<String> description = [
-  "Gesture-Based Gesture-Based ABA Learning ABA Learning Board",
+  "Gesture-Based ABA Learning Board",
   "Visual Story Emotional Regulation",
-  "Vocal Therapy Speech-Language Principles",
-  "Interactive Exercise Game Occupational Focus",
-  "Gesture-Controlled Social Skills Training",
-  "Sensory ntegration Mindfulness Training",
+  "MOOD Synthesizer",
+  // "Vocal Therapy Speech-Language Principles",
+  // "Interactive Exercise Game Occupational Focus",
+  // "Gesture-Controlled Social Skills Training",
+  // "Sensory ntegration Mindfulness Training",
+];
+
+List<dynamic> pages = [
+  const GestureGameHome(),
+  const VocalGame(),
+  const EmotionSynthesisPage(),
 ];
 
 class EdumoveHome extends StatelessWidget {
@@ -29,10 +37,24 @@ class EdumoveHome extends StatelessWidget {
           spacing: 15,
           runSpacing: 15,
           children: [
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < title.length; i++)
               InkWell(
                 onTap: () {
-                  Get.to(() => const HomePage());
+                  switch (i) {
+                    case 0:
+                      Get.to(() => const GestureGameHome());
+
+                      break;
+                    case 1:
+                      Get.to(() => const VocalGame());
+
+                      break;
+                    case 2:
+                      Get.to(() => const EmotionSynthesisPage());
+
+                      break;
+                    default:
+                  }
                 },
                 child: Container(
                   width: 0.45.sw,

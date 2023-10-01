@@ -8,3 +8,4 @@ export 'home_page/sub_category.dart';
 export 'search_and_filter.dart';
 export 'search_results.dart';
 export 'home_page/my_library.dart';
+export 'edumov/edumov.dart';

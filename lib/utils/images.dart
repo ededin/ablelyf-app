@@ -61,3 +61,8 @@ class SignAlphabetsImages {
   static const String y = 'assets/images/sign/y.png';
   static const String z = 'assets/images/sign/z.png';
 }
+
+class LottieAssets {
+  static const String correct = 'assets/lottie/correct.json';
+  static const String wrong = 'assets/lottie/wrong.json';
+}

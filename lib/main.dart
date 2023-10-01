@@ -6,11 +6,11 @@ import 'firebase_options.dart';
 void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
-
     constants = Constants();
     commonFunction = CommonFunction();
     await appSharedPreference.init();
 
+    constants.cameras = await availableCameras();
     // constants.myId =
     //     (appSharedPreference.getString(SharedPreferenceKeys.userId) ?? '');
     await Firebase.initializeApp(options: DefaultFirebaseOptions.android);

@@ -17,6 +17,8 @@ class Constants {
 
   List<String> alphabet = List.generate(
       26, (index) => String.fromCharCode('A'.codeUnitAt(0) + index));
+
+  List<CameraDescription> cameras = [];
 }
 
 late Constants constants;
