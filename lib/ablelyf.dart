@@ -22,5 +22,5 @@ export 'package:webview_flutter/webview_flutter.dart';
 export 'package:flutter/services.dart';
 export 'package:camera/camera.dart';
 export 'package:google_ml_kit/google_ml_kit.dart';
-
+export 'package:gif_view/gif_view.dart';
 // export 'package:picovoice_flutter/picovoice_manager.dart';

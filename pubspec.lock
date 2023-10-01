@@ -408,6 +408,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.5"
+  gif_view:
+    dependency: "direct main"
+    description:
+      name: gif_view
+      sha256: "73a089a046fd1a5e63e3856cf30ef7bac1e64b78d79becde1449e955dddfb645"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   google_ml_kit:
     dependency: "direct main"
     description:
