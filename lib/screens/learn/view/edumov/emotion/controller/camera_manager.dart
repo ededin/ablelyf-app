@@ -1,15 +1,12 @@
 import 'package:camera/camera.dart';
+import 'package:newp/utils/utils.dart';
 
 class CameraManager {
-  List<CameraDescription>? cameras;
   CameraController? _controller;
 
-  Future<CameraController?> load() async {
-    cameras = await availableCameras();
-    //Set front camera if available or back if not available
-    int position = cameras!.length > 0 ? 1 : 0;
+  Future<CameraController?> load(position) async {
     _controller = CameraController(
-      cameras![0],
+      constants.cameras[position],
       ResolutionPreset.veryHigh,
       enableAudio: false,
     );

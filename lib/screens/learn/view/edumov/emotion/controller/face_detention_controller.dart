@@ -1,4 +1,4 @@
-import '../../../../../../ablelyf.dart';
+/* import '../../../../../../ablelyf.dart';
 
 class FaceDetetorController {
   FaceDetector? _faceDetector;
@@ -42,3 +42,4 @@ class FaceDetetorController {
     return response;
   }
 }
+ */

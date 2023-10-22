@@ -1,4 +1,4 @@
-import 'package:newp/ablelyf.dart';
+/* import 'package:newp/ablelyf.dart';
 
 class EmotionSynthesisPage extends StatefulWidget {
   const EmotionSynthesisPage({super.key});
@@ -34,6 +34,12 @@ class _EmotionSynthesisPageState extends State<EmotionSynthesisPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          emotionController.switchCamera();
+        },
+        child: const Icon(Icons.switch_camera_outlined),
+      ),
       body: GetBuilder<EmotionController>(
         builder: (_) {
           noFace = emotionController.label == SmileStatus.noFace;
@@ -103,3 +109,4 @@ class _EmotionSynthesisPageState extends State<EmotionSynthesisPage> {
     );
   }
 }
+ */

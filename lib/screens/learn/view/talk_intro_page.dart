@@ -1,6 +1,6 @@
 import 'package:newp/ablelyf.dart';
 import 'package:newp/screens/learn/view/communication_home.dart';
-import 'package:newp/screens/learn/view/edumove_home.dart';
+import 'package:newp/screens/learn/view/edumov/edumove_home.dart';
 
 class TalkIntroPage extends StatelessWidget {
   const TalkIntroPage({super.key});

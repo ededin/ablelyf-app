@@ -1,4 +1,4 @@
-import '../../../../../../ablelyf.dart';
+/* import '../../../../../../ablelyf.dart';
 
 enum SmileStatus {
   noFace,
@@ -24,7 +24,29 @@ class EmotionController extends GetxController {
   }
 
   Future<void> loadCamera() async {
-    cameraController = await _cameraManager?.load();
+    int position = constants.cameras.length > 1 ? 1 : 0;
+
+    cameraController = await _cameraManager?.load(position);
+    update();
+  }
+
+  Future<void> switchCamera() async {
+    final lensDirection = cameraController?.description.lensDirection;
+
+    int postion;
+
+    if (lensDirection == CameraLensDirection.front) {
+      postion = constants.cameras.indexWhere((description) =>
+          description.lensDirection == CameraLensDirection.back);
+    } else {
+      postion = constants.cameras.indexWhere((description) =>
+          description.lensDirection == CameraLensDirection.front);
+    }
+
+    if (postion != -1) {
+      cameraController = await _cameraManager?.load(postion);
+    }
+
     update();
   }
 
@@ -64,7 +86,7 @@ class EmotionController extends GetxController {
           InputImageFormatValue.fromRawValue(cameraImage.format.raw) ??
               InputImageFormat.nv21;
 
-      final planeData = cameraImage.planes.map(
+      /*     final planeData = cameraImage.planes.map(
         (Plane plane) {
           return InputImageMetadata(
             bytesPerRow: plane.bytesPerRow,
@@ -74,7 +96,7 @@ class EmotionController extends GetxController {
             rotation: imageRotation,
           );
         },
-      ).toList();
+      ).toList(); */
 
       final inputImageData = InputImageMetadata(
         size: imageSize,
@@ -125,3 +147,4 @@ class EmotionController extends GetxController {
     }
   }
 }
+ */
