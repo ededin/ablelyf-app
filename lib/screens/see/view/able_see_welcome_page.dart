@@ -56,15 +56,15 @@ class _AbleSeeWelcomePageState extends State<AbleSeeWelcomePage> {
                       width: 0.12.sw,
                       height: 0.12.sh,
                       decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'),
-                              fit: BoxFit.cover)),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                    const SizedBox(
-                      width: 20,
-                    ),
+                    const SizedBox(width: 20),
                     const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

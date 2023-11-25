@@ -5,6 +5,7 @@ import '../../../../../../ablelyf.dart';
 class ObjectController extends GetxController {
   ObjectCameraManager? _cameraManager;
   CameraController? cameraController;
+  final FlutterTts flutterTts = FlutterTts();
 
   int _cameraIndex = -1;
 
@@ -14,7 +15,16 @@ class ObjectController extends GetxController {
   SmileStatus? label = SmileStatus.noFace;
 
   ObjectController() {
+    flutterTts.setLanguage("en-US");
+
     _cameraManager = ObjectCameraManager();
+  }
+
+  Future<void> speak(text) async {
+    await flutterTts.setVolume(0.5);
+    await flutterTts.setPitch(1.0);
+    await flutterTts.setSpeechRate(0.4);
+    await flutterTts.speak(text);
   }
 
   Future<void> loadCamera() async {
@@ -174,15 +184,20 @@ class ObjectController extends GetxController {
     if (faces.isNotEmpty) {
       faces.sort((a, b) => b.confidence.compareTo(a.confidence));
       print(
-          'FACES: ${faces.map((e) => e.label + " " + e.index.toString() + " " + e.confidence.toString())}');
+          'FACES: ${faces.map((e) => "${e.label} ${e.index} ${e.confidence}")}');
 
-      faceAtMoment = faces.first.label;
+      faceAtMoment = "${faces.first.label} is Ahead";
+
+      await Future.delayed(const Duration(seconds: 3));
     } else {
       faceAtMoment = '';
       // label = SmileStatus.noFace;
     }
     _isDetecting = false;
     update();
+    if (faceAtMoment.isNotEmpty) {
+      speak(faceAtMoment);
+    }
   }
 
   SmileStatus detectSmile(smileProb) {

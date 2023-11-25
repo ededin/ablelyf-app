@@ -63,7 +63,7 @@ class _SeeCameraPageState extends State<SeeCameraPage> {
               Expanded(
                 child: Center(
                   child: Text(objectController.faceAtMoment.isNotEmpty
-                      ? "${objectController.faceAtMoment} is Ahead"
+                      ? objectController.faceAtMoment
                       : ""),
                 ),
               )
