@@ -4,7 +4,7 @@ import 'package:newp/screens/learn/view/edumov/speech/view/sppech_home.dart';
 List<String> title = [
   "GB - ABA",
   "VS - ER",
-  // "MS",
+  "MS",
   "ST"
   // "VT - SLP",
   // "IEG - OF",
@@ -15,7 +15,7 @@ List<String> title = [
 List<String> description = [
   "Gesture-Based ABA Learning Board",
   "Visual Story Emotional Regulation",
-  // "MOOD Synthesizer",
+  "MOOD Synthesizer",
   "Speech Therapy",
   // "Vocal Therapy Speech-Language Principles",
   // "Interactive Exercise Game Occupational Focus",
@@ -26,7 +26,7 @@ List<String> description = [
 List<dynamic> pages = [
   const GestureGameHome(),
   const VocalGame(),
-  // const EmotionSynthesisPage(),
+  const EmotionSynthesisPage(),
 ];
 
 class EdumoveHome extends StatelessWidget {
@@ -45,18 +45,18 @@ class EdumoveHome extends StatelessWidget {
                 onTap: () {
                   switch (i) {
                     case 0:
-                      Get.to(() => SelectStudentPage());
+                      Get.to(() => const SelectStudentPage());
 
                       break;
                     case 1:
                       Get.to(() => const VocalGame());
 
                       break;
-                    // case 2:
-                    //   Get.to(() => const EmotionSynthesisPage());
-
-                    //   break;
                     case 2:
+                      Get.to(() => const EmotionSynthesisPage());
+
+                      break;
+                    case 3:
                       Get.to(() => const SpeechTherapyHome());
 
                       break;

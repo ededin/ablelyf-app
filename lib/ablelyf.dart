@@ -1,5 +1,5 @@
 export 'package:flutter/material.dart' hide Ink;
-export 'package:get/get.dart';
+export 'package:get/get.dart' hide HeaderValue;
 export 'utils/utils.dart';
 export 'dart:convert';
 export 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +21,7 @@ export 'package:speech_to_text/speech_recognition_result.dart';
 export 'package:webview_flutter/webview_flutter.dart';
 export 'package:flutter/services.dart';
 export 'package:camera/camera.dart';
-// export 'package:google_ml_kit/google_ml_kit.dart';
+export 'package:google_ml_kit/google_ml_kit.dart';
+
 export 'package:gif_view/gif_view.dart';
 // export 'package:picovoice_flutter/picovoice_manager.dart';

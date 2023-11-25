@@ -1,26 +1,75 @@
 import 'package:newp/ablelyf.dart';
 
-class SeeCameraPage extends StatelessWidget {
+class SeeCameraPage extends StatefulWidget {
   const SeeCameraPage({super.key});
+
+  @override
+  State<SeeCameraPage> createState() => _SeeCameraPageState();
+}
+
+class _SeeCameraPageState extends State<SeeCameraPage> {
+  ObjectController objectController = Get.put(ObjectController());
+
+  @override
+  void initState() {
+    // controller = GifController(loop: false, autoPlay: false);
+    objectController.loadCamera().then((value) {
+      objectController.startImageStream();
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    objectController.cameraController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CachedNetworkImage(
-        imageUrl:
-            'https://uploads-ssl.webflow.com/624ac40503a527cf47af4192/6355c00cd7135d206b033692_Object%20Detection%20and%20Person%20Detection%20in%20Computer%20Vision.png',
-        height: 1.sh,
-        width: 1.sw,
-        fit: BoxFit.fitHeight,
-        placeholder: (context, url) {
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(const AbleSeeCreateAccount());
+          objectController.switchCamera();
         },
-        child: const Icon(Icons.home),
+        child: const Icon(Icons.switch_camera_outlined),
+      ),
+      body: GetBuilder<ObjectController>(
+        builder: (_) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              objectController.cameraController != null &&
+                      objectController.cameraController!.value.isInitialized
+                  ? Align(
+                      alignment: Alignment.topCenter,
+                      child: SafeArea(
+                        child: SizedBox(
+                          height: 0.9.sh,
+                          // width: 1.sw,
+                          child: Transform.scale(
+                            scale: 1,
+                            child: CameraPreview(
+                              objectController.cameraController!,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+              Expanded(
+                child: Center(
+                  child: Text(objectController.faceAtMoment.isNotEmpty
+                      ? "${objectController.faceAtMoment} is Ahead"
+                      : ""),
+                ),
+              )
+            ],
+          );
+        },
       ),
     );
   }

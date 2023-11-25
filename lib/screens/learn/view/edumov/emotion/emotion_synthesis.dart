@@ -1,4 +1,4 @@
-/* import 'package:newp/ablelyf.dart';
+import 'package:newp/ablelyf.dart';
 
 class EmotionSynthesisPage extends StatefulWidget {
   const EmotionSynthesisPage({super.key});
@@ -95,7 +95,7 @@ class _EmotionSynthesisPageState extends State<EmotionSynthesisPage> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Transform.scale(
-                          scale: 0.5,
+                          scale: 1,
                           child: CameraPreview(
                               emotionController.cameraController!),
                         ),
@@ -109,4 +109,3 @@ class _EmotionSynthesisPageState extends State<EmotionSynthesisPage> {
     );
   }
 }
- */

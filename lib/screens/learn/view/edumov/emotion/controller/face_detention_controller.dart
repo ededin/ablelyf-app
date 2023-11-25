@@ -1,4 +1,5 @@
-/* import '../../../../../../ablelyf.dart';
+import '../../../../../../ablelyf.dart';
+import '../../edumov.dart';
 
 class FaceDetetorController {
   FaceDetector? _faceDetector;
@@ -42,4 +43,3 @@ class FaceDetetorController {
     return response;
   }
 }
- */
