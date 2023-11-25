@@ -33,6 +33,16 @@ class AppIcons {
   static const String blackLogo = 'assets/logo/black-logo.png';
 }
 
+class PageNew {
+  static const String camera = 'assets/images/camera.png';
+  static const String bookreading = 'assets/images/bookreading.png';
+  static const String grouptask = 'assets/images/grouptask.png';
+  static const String retrotv = 'assets/images/retrotv.png';
+  static const String selectIcon = 'assets/images/select.png';
+  static const String siren = 'assets/images/siren.png';
+  static const String workflow = 'assets/images/workflow.png';
+}
+
 class SignAlphabetsImages {
   static const String a = 'assets/images/sign/a.png';
   static const String b = 'assets/images/sign/b.png';

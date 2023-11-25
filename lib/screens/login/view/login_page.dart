@@ -134,6 +134,26 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                  InkWell(
+                    onTap: () {
+                      Get.to(() {
+                         return const Page1();
+                      });
+                    },
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        LoginPageString.createAnAccount,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
