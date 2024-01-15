@@ -10,7 +10,7 @@ class ObjectController extends GetxController {
   int _cameraIndex = -1;
 
   bool _isDetecting = false;
-  // List<ImageLabel> faces = [];
+  List<ImageLabel> faces = [];
   String faceAtMoment = '';
   SmileStatus? label = SmileStatus.noFace;
 
@@ -70,19 +70,19 @@ class ObjectController extends GetxController {
       if (_isDetecting) return;
       _isDetecting = true;
 
-      // MethodChannel channel = MethodChannel('imageShare');
+      /* MethodChannel channel = MethodChannel('imageShare');
 
-      // channel.invokeMethod(
-      //   'imageStream',
-      //   {
-      //     'planeBuffer': cameraImage.planes[0].bytes.buffer.asUint8List(),
-      //     'height': cameraImage.height,
-      //     'width': cameraImage.width,
-      //     'rotation': camera.sensorOrientation.toDouble(),
-      //   },
-      // ).then((value) => _isDetecting = false);
+      channel.invokeMethod(
+        'imageStream',
+        {
+          'planeBuffer': cameraImage.planes[0].bytes.buffer.asUint8List(),
+          'height': cameraImage.height,
+          'width': cameraImage.width,
+          'rotation': camera.sensorOrientation.toDouble(),
+        },
+      ).then((value) => _isDetecting = false);
 
-      /*     final planeData = cameraImage.planes.map(
+      final planeData = cameraImage.planes.map(
         (Plane plane) {
           return InputImageMetadata(
             bytesPerRow: plane.bytesPerRow,
@@ -94,13 +94,13 @@ class ObjectController extends GetxController {
         },
       ).toList(); */
 
-      /*   final inputImage = _inputImageFromCameraImage(cameraImage);
+      final inputImage = _inputImageFromCameraImage(cameraImage);
 
       if (inputImage != null) {
         processImage(inputImage);
       } else {
         _isDetecting = false;
-      } */
+      }
     });
   }
 
@@ -111,7 +111,7 @@ class ObjectController extends GetxController {
     DeviceOrientation.landscapeRight: 270,
   };
 
-  /* InputImage? _inputImageFromCameraImage(CameraImage image) {
+  InputImage? _inputImageFromCameraImage(CameraImage image) {
     if (cameraController == null) return null;
 
     // get image rotation
@@ -197,9 +197,9 @@ class ObjectController extends GetxController {
     update();
     if (faceAtMoment.isNotEmpty) {
       speak(faceAtMoment);
-    } 
+    }
   }
-*/
+
   /*  SmileStatus detectSmile(smileProb) {
     if (smileProb > 0.86) {
       faceAtMoment = 'happy_face.png';

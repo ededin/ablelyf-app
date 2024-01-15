@@ -2,7 +2,7 @@ import '../../../../../../ablelyf.dart';
 import '../../edumov.dart';
 
 class FaceDetetorController {
-  /*  FaceDetector? _faceDetector;
+  FaceDetector? _faceDetector;
 
   Future<List<FaceModel>?> processImage(InputImage inputImage) async {
     _faceDetector = GoogleMlKit.vision.faceDetector(
@@ -23,7 +23,7 @@ class FaceDetetorController {
     double? rightYears;
 
     for (Face face in faces!) {
-      final rect = face.boundingBox;
+      // final rect = face.boundingBox;
       if (face.smilingProbability != null) {
         smile = face.smilingProbability;
       }
@@ -41,5 +41,5 @@ class FaceDetetorController {
     }
 
     return response;
-  } */
+  }
 }

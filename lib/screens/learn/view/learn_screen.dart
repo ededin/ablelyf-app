@@ -24,7 +24,8 @@ class _AbletoLearnState extends State<AbletoLearn> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
-                      'https://etimg.etb2bimg.com/photo/99033076.cms'),
+                    'https://etimg.etb2bimg.com/photo/99033076.cms',
+                  ),
                 ),
               ),
             ),
@@ -42,10 +43,11 @@ class _AbletoLearnState extends State<AbletoLearn> {
           const Text(
             'Autism',
             style: TextStyle(
-                color: Colors.black26,
-                fontWeight: FontWeight.w700,
-                fontSize: 17,
-                fontStyle: FontStyle.normal),
+              color: Colors.black26,
+              fontWeight: FontWeight.w700,
+              fontSize: 17,
+              fontStyle: FontStyle.normal,
+            ),
           ),
           const Spacer(),
           Row(
@@ -54,7 +56,9 @@ class _AbletoLearnState extends State<AbletoLearn> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                    color: Colors.black, shape: BoxShape.circle),
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
                 child: const Icon(
                   Icons.search,
                   color: Colors.white,
@@ -64,7 +68,9 @@ class _AbletoLearnState extends State<AbletoLearn> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                    color: Colors.black, shape: BoxShape.circle),
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
                 child: const Icon(
                   Icons.tag,
                   color: Colors.white,
@@ -80,22 +86,24 @@ class _AbletoLearnState extends State<AbletoLearn> {
                   );
                 },
                 child: Container(
-                    alignment: Alignment.center,
-                    width: 0.44.sw,
-                    height: 50,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.black,
+                  alignment: Alignment.center,
+                  width: 0.44.sw,
+                  height: 50,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: Colors.black,
+                  ),
+                  child: const Text(
+                    'Get started',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
-                    child: const Text(
-                      'Get started',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    )),
-              )
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(

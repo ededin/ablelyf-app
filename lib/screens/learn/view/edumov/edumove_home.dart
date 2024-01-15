@@ -4,7 +4,7 @@ import 'package:newp/screens/learn/view/edumov/speech/view/sppech_home.dart';
 List<String> title = [
   "GB - ABA",
   "VS - ER",
-  // "MS",
+  "MS",
   "ST"
   // "VT - SLP",
   // "IEG - OF",
@@ -15,7 +15,7 @@ List<String> title = [
 List<String> description = [
   "Gesture-Based ABA Learning Board",
   "Visual Story Emotional Regulation",
-  // "MOOD Synthesizer",
+  "MOOD Synthesizer",
   "Speech Therapy",
   // "Vocal Therapy Speech-Language Principles",
   // "Interactive Exercise Game Occupational Focus",
