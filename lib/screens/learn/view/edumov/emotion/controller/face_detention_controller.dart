@@ -2,7 +2,7 @@ import '../../../../../../ablelyf.dart';
 import '../../edumov.dart';
 
 class FaceDetetorController {
-  FaceDetector? _faceDetector;
+  /*  FaceDetector? _faceDetector;
 
   Future<List<FaceModel>?> processImage(InputImage inputImage) async {
     _faceDetector = GoogleMlKit.vision.faceDetector(
@@ -41,5 +41,5 @@ class FaceDetetorController {
     }
 
     return response;
-  }
+  } */
 }

@@ -1,6 +1,8 @@
 import '../../../ablelyf.dart';
 
 class LoginControlller extends GetxController {
+  bool loading = false;
+
   void createEmailAccount(
       {required String email,
       required String password,
@@ -8,7 +10,11 @@ class LoginControlller extends GetxController {
       String? fullname,
       String? phone}) async {
     try {
+      loading = true;
+      update();
       if (password.length <= 8) {
+        loading = false;
+        update();
         commonFunction.snackbar('Enter more then 8 letters in password');
       } else {
         final credential =
@@ -36,17 +42,27 @@ class LoginControlller extends GetxController {
         print('CREDENTIAL: ${credential}');
         print('USER: ${user}');
         commonFunction.snackbar('User Create Sucessfully');
-        // Get.to(() {
-        //   return const LoginPage();
-        // });
+        loading = false;
+        update();
+        Get.to(() {
+          return const LoginPage();
+        });
       }
     } on FirebaseAuthException catch (e) {
+      loading = false;
+      update();
       if (e.code == 'weak-password') {
+        commonFunction.snackbar('The password provided is too weak.');
+
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
+        commonFunction.snackbar('The account already exists for that email.');
+
         print('The account already exists for that email.');
       }
     } catch (e) {
+      loading = false;
+      update();
       print(e);
     }
   }

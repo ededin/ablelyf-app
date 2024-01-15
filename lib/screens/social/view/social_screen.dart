@@ -18,12 +18,12 @@ class _SocialScreenState extends State<SocialScreen> {
             width: 1.sw,
             decoration: BoxDecoration(
               image: const DecorationImage(
-                  image: NetworkImage(
-                      'https://img.freepik.com/premium-photo/man-with-beautiful-cow-man-playing-with-cow-animal-care-image_181020-1239.jpg?w=2000'),
-                  fit: BoxFit.cover),
-              borderRadius: BorderRadius.circular(
-                15.0,
+                image: NetworkImage(
+                  'https://www.answerlab.com/hubfs/Imported_Blog_Media/Featured%20Image%20w%20Background.png',
+                ),
+                fit: BoxFit.cover,
               ),
+              borderRadius: BorderRadius.circular(15.0),
             ),
           ),
           const SizedBox(

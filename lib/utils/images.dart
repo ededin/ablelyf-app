@@ -66,3 +66,13 @@ class LottieAssets {
   static const String correct = 'assets/lottie/correct.json';
   static const String wrong = 'assets/lottie/wrong.json';
 }
+
+class PageNew {
+  static const String camera = 'assets/images/camera.png';
+  static const String bookreading = 'assets/images/bookreading.png';
+  static const String grouptask = 'assets/images/grouptask.png';
+  static const String retrotv = 'assets/images/retrotv.png';
+  static const String selectIcon = 'assets/images/select.png';
+  static const String siren = 'assets/images/siren.png';
+  static const String workflow = 'assets/images/workflow.png';
+}

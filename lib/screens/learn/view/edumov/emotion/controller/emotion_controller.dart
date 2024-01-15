@@ -69,7 +69,7 @@ class EmotionController extends GetxController {
       //   },
       // ).then((value) => _isDetecting = false);
 
-      final WriteBuffer allBytes = WriteBuffer();
+      /*  final WriteBuffer allBytes = WriteBuffer();
       for (Plane plane in cameraImage.planes) {
         allBytes.putUint8List(plane.bytes);
       }
@@ -110,12 +110,12 @@ class EmotionController extends GetxController {
         metadata: inputImageData,
       );
 
-      processImage(inputImage);
+      processImage(inputImage); */
     });
   }
 
   Future<void> processImage(inputImage) async {
-    faces = await _faceDetect?.processImage(inputImage);
+    /*  faces = await _faceDetect?.processImage(inputImage);
 
     if (faces != null && faces!.isNotEmpty) {
       FaceModel? face = faces?.first;
@@ -125,7 +125,7 @@ class EmotionController extends GetxController {
       label = SmileStatus.noFace;
     }
     _isDetecting = false;
-    update();
+    update(); */
   }
 
   SmileStatus detectSmile(smileProb) {

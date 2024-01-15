@@ -1,23 +1,27 @@
-import 'dart:io';
+import 'dart:math';
 
 import '../../../../../../ablelyf.dart';
 
-class ObjectController extends GetxController {
-  ObjectCameraManager? _cameraManager;
+class IrisController extends GetxController {
+  IrisCameraManager? _cameraManager;
   CameraController? cameraController;
   final FlutterTts flutterTts = FlutterTts();
+
+  final MethodChannel channel = const MethodChannel("facelandmark");
 
   int _cameraIndex = -1;
 
   bool _isDetecting = false;
-  // List<ImageLabel> faces = [];
-  String faceAtMoment = '';
+  // List<Face> faces = [];
+  List<Point<int>> points = [];
+
+  Point faceAtMoment = const Point(0, 0);
   SmileStatus? label = SmileStatus.noFace;
 
-  ObjectController() {
+  IrisController() {
     flutterTts.setLanguage("en-US");
 
-    _cameraManager = ObjectCameraManager();
+    _cameraManager = IrisCameraManager();
   }
 
   Future<void> speak(text) async {
@@ -29,7 +33,7 @@ class ObjectController extends GetxController {
 
   Future<void> loadCamera() async {
     // int position = constants.cameras.length > 1 ? 1 : 0;
-    int position = 0;
+    int position = 1;
 
     _cameraIndex = position;
 
@@ -94,13 +98,14 @@ class ObjectController extends GetxController {
         },
       ).toList(); */
 
-      /*   final inputImage = _inputImageFromCameraImage(cameraImage);
+      // final inputImage = _inputImageFromCameraImage(cameraImage);
+      // print('INPUTIMAGE: ${inputImage}');
 
-      if (inputImage != null) {
-        processImage(inputImage);
+      if (cameraImage != null) {
+        processImage(cameraImage);
       } else {
         _isDetecting = false;
-      } */
+      }
     });
   }
 
@@ -111,7 +116,7 @@ class ObjectController extends GetxController {
     DeviceOrientation.landscapeRight: 270,
   };
 
-  /* InputImage? _inputImageFromCameraImage(CameraImage image) {
+  /* InputImage? */ _inputImageFromCameraImage(CameraImage image) {
     if (cameraController == null) return null;
 
     // get image rotation
@@ -122,7 +127,7 @@ class ObjectController extends GetxController {
     final sensorOrientation = camera.sensorOrientation;
     // print(
     //     'lensDirection: ${camera.lensDirection}, sensorOrientation: $sensorOrientation, ${_controller?.value.deviceOrientation} ${_controller?.value.lockedCaptureOrientation} ${_controller?.value.isCaptureOrientationLocked}');
-    InputImageRotation? rotation;
+    /*  InputImageRotation? rotation;
     if (Platform.isIOS) {
       rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
     } else if (Platform.isAndroid) {
@@ -150,12 +155,13 @@ class ObjectController extends GetxController {
     // * nv21 for Android
     // * bgra8888 for iOS
     if (format == null ||
-        (Platform.isAndroid && format != InputImageFormat.nv21) ||
+        //     (Platform.isAndroid && format != InputImageFormat.nv21) ||
         (Platform.isIOS && format != InputImageFormat.bgra8888)) return null;
 
     // since format is constraint to nv21 or bgra8888, both only have one plane
-    if (image.planes.length != 1) return null;
-    final plane = image.planes.first;
+    // if (image.planes.length != 1) return null;
+    final Plane plane = image.planes.first;
+    // print('PLANE: ${plane.bytes}');
 
     // compose InputImage using bytes
     return InputImage.fromBytes(
@@ -166,41 +172,95 @@ class ObjectController extends GetxController {
         format: format, // used only in iOS
         bytesPerRow: plane.bytesPerRow, // used only in iOS
       ),
-    );
+    ); */
   }
 
-  Future<void> processImage(inputImage) async {
-    const path = 'assets/models/object_labeler.tflite';
+  Future<void> processImage(CameraImage inputImage) async {
+    // print('INPUTIMAGE: ${inputImage}');
+    await channel.invokeMethod('data', {
+      "bytes": inputImage.planes.map((plane) {
+        return plane.bytes;
+      }).toList(),
+      "height": inputImage.height,
+      "width": inputImage.width,
+      "rotation": 0,
+    });
+    /*   final FaceDetector faceDetector = FaceDetector(
+      options: FaceDetectorOptions(
+        enableContours: true,
+        enableLandmarks: true,
+      ),
+    );
 
-    final modelPath = await getAssetPath(path);
-
-    final LocalLabelerOptions options =
-        LocalLabelerOptions(confidenceThreshold: 0.5, modelPath: modelPath);
-
-    final imageLabeler = ImageLabeler(options: options);
-
-    faces = await imageLabeler.processImage(inputImage);
+    faces = await faceDetector.processImage(inputImage);
 
     if (faces.isNotEmpty) {
-      faces.sort((a, b) => b.confidence.compareTo(a.confidence));
+      points = faces.first.contours[FaceContourType.leftEye]?.points ?? [];
+
+      points = points.sublist(0, 1);
+      print('POINTS: ${points}');
       print(
-          'FACES: ${faces.map((e) => "${e.label} ${e.index} ${e.confidence}")}');
+          'FACES: ${faces.map((e) => e.contours[FaceContourType.leftEye]?.points)}');
+      // faces.sort((a, b) => b.confidence.compareTo(a.confidence));
+      // print(
+      //     'FACES: ${faces.map((e) => "${e.label} ${e.index} ${e.confidence}")}');
 
-      faceAtMoment = "${faces.first.label} is Ahead";
+      faceAtMoment =
+          faces.first.landmarks[FaceLandmarkType.leftEye]?.position ??
+              const Point(0, 0);
 
-      await Future.delayed(const Duration(seconds: 3));
+      // await Future.delayed(const Duration(seconds: 3));
     } else {
-      faceAtMoment = '';
+      points = [];
+      faceAtMoment = const Point(0, 0);
+      // label = SmileStatus.noFace;
+    } */
+    _isDetecting = false;
+    update();
+    // if (faceAtMoment.isNotEmpty) {
+    //   speak(faceAtMoment);
+    // }
+  }
+
+  /* Future<void> processImage(inputImage) async {
+    final FaceDetector faceDetector = FaceDetector(
+      options: FaceDetectorOptions(
+        enableContours: true,
+        enableLandmarks: true,
+      ),
+    );
+
+    faces = await faceDetector.processImage(inputImage);
+
+    if (faces.isNotEmpty) {
+      points = faces.first.contours[FaceContourType.leftEye]?.points ?? [];
+
+      points = points.sublist(0, 1);
+      print('POINTS: ${points}');
+      print(
+          'FACES: ${faces.map((e) => e.contours[FaceContourType.leftEye]?.points)}');
+      // faces.sort((a, b) => b.confidence.compareTo(a.confidence));
+      // print(
+      //     'FACES: ${faces.map((e) => "${e.label} ${e.index} ${e.confidence}")}');
+
+      faceAtMoment =
+          faces.first.landmarks[FaceLandmarkType.leftEye]?.position ??
+              const Point(0, 0);
+
+      // await Future.delayed(const Duration(seconds: 3));
+    } else {
+      points = [];
+      faceAtMoment = const Point(0, 0);
       // label = SmileStatus.noFace;
     }
     _isDetecting = false;
     update();
-    if (faceAtMoment.isNotEmpty) {
-      speak(faceAtMoment);
-    } 
+    // if (faceAtMoment.isNotEmpty) {
+    //   speak(faceAtMoment);
+    // }
   }
-*/
-  /*  SmileStatus detectSmile(smileProb) {
+ */
+  /* SmileStatus detectSmile(smileProb) {
     if (smileProb > 0.86) {
       faceAtMoment = 'happy_face.png';
       return SmileStatus.bigSmileWithTeeth;
@@ -217,5 +277,6 @@ class ObjectController extends GetxController {
       faceAtMoment = 'sady_face.png';
       return SmileStatus.sad;
     }
-  } */
+  }
+ */
 }

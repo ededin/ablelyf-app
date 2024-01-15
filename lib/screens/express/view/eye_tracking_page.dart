@@ -28,15 +28,16 @@ class _AbleToExpressState extends State<AbleToExpress> {
               children: [
                 InkWell(
                   onTap: () {
-                    Get.to(const EyeControllerPage());
+                    Get.to(const Page1());
                   },
                   child: Container(
                     width: 250,
                     height: 250,
                     margin: const EdgeInsets.only(bottom: 50),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.white, width: 5)),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: Colors.white, width: 5),
+                    ),
                   ),
                 ),
                 const Text(
