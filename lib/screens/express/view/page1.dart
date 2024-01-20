@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:newp/ablelyf.dart';
+import 'package:newp/screens/express/view/nextpage.dart';
 
 class Page1 extends StatefulWidget {
   const Page1({super.key});
@@ -11,6 +13,8 @@ class Page1 extends StatefulWidget {
 
 class _Page1State extends State<Page1> {
   IrisController irisController = Get.put(IrisController());
+
+  List<GlobalKey> keys = List.generate(4, (index) => GlobalKey());
 
   static const EventChannel stream = EventChannel('LandmarkListener');
 
@@ -23,6 +27,7 @@ class _Page1State extends State<Page1> {
 
   double leftPos = 0;
   double topPos = 0;
+  bool click = false;
   StreamSubscription? _timerSubscription;
   void _enableTimer() {
     _timerSubscription ??= stream.receiveBroadcastStream().listen(_updateTimer);
@@ -31,7 +36,7 @@ class _Page1State extends State<Page1> {
   void _updateTimer(timer) {
     // Map<String, dynamic> data = jsonDecode(timer);
     setState(() {
-      // print('Result DATA: ${timer}');
+      print('Result DATA: ${timer}');
       location = jsonDecode(timer);
       if (location != null) {
         left = location?["left"];
@@ -41,8 +46,74 @@ class _Page1State extends State<Page1> {
         eye = location?["eye"];
         leftPos = location?["leftPercentage"];
         topPos = location?["topPercentage"];
-        print('Response TOPPOS: ${topPos}');
-        print('Response LEFTPOS: ${leftPos}');
+
+        click = location?["click"];
+
+        if (click) {
+          int index = keys.indexWhere((element) {
+            RenderBox? box1 =
+                element.currentContext?.findRenderObject() as RenderBox?;
+            print('SssssPOSITION: ${box1}');
+
+            if (box1 != null) {
+              Offset position = box1.localToGlobal(Offset.zero);
+              print(
+                  'SssssPOSITION: ${position}         ${1.sw - eye!['y'].toDouble() * 1.sw}           ${1.sh - eye!['x'].toDouble() * 1.sh}');
+
+              double xPosition = 1.sw - eye!['y'].toDouble() * 1.sw;
+              double yPosition = 1.sh - eye!['x'].toDouble() * 1.sh;
+
+              double width = box1.size.width;
+              print('SssssPOSITION WIDTH: ${width}');
+              double height = box1.size.height;
+
+              double boxLeft = position.dx;
+              double boxRight = position.dx + width;
+
+              double boxTop = position.dy;
+              double boxBottom = position.dy + height;
+
+              return yPosition <= boxBottom &&
+                  yPosition >= boxTop &&
+                  xPosition <= boxRight &&
+                  xPosition >= boxLeft;
+            }
+
+            return false;
+          });
+
+          if (index != -1) {
+            String title = "";
+
+            switch (index) {
+              case 0:
+                title = "Communication";
+                break;
+              case 1:
+                title = "Entertainment";
+                break;
+              case 2:
+                title = "Entertainment";
+                break;
+              case 3:
+                title = "Alert";
+                break;
+              default:
+            }
+            Get.to(
+              () => NextPage(
+                title: title,
+              ),
+            );
+          }
+
+          // tap(
+          //   Offset(
+          //     eye!['x'].toDouble() * 1.sw,
+          //     eye!['y'].toDouble() * 1.sh,
+          //   ),
+          // );
+        }
       }
       // print('Result DATA: ${location!['sublist'].length}');
     });
@@ -50,6 +121,7 @@ class _Page1State extends State<Page1> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
     irisController.loadCamera().then((value) async {
       await irisController.channel.invokeMethod("start");
       await irisController.startImageStream();
@@ -82,7 +154,7 @@ class _Page1State extends State<Page1> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
+                  /* Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -154,12 +226,13 @@ class _Page1State extends State<Page1> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 30), */
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
+                        key: keys[0],
                         height: 0.2.sh,
                         width: 0.22.sw,
                         decoration: BoxDecoration(
@@ -182,6 +255,7 @@ class _Page1State extends State<Page1> {
                         ),
                       ),
                       Container(
+                        key: keys[1],
                         height: 0.2.sh,
                         width: 0.22.sw,
                         decoration: BoxDecoration(
@@ -204,6 +278,7 @@ class _Page1State extends State<Page1> {
                         ),
                       ),
                       Container(
+                        key: keys[2],
                         height: 0.2.sh,
                         width: 0.22.sw,
                         decoration: BoxDecoration(
@@ -226,6 +301,7 @@ class _Page1State extends State<Page1> {
                         ),
                       ),
                       Container(
+                        key: keys[3],
                         height: 0.2.sh,
                         width: 0.20.sw,
                         decoration: BoxDecoration(
@@ -250,7 +326,7 @@ class _Page1State extends State<Page1> {
                     ],
                   ),
                   SizedBox(height: 0.1.sh),
-                  Row(
+                  /*  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -364,10 +440,13 @@ class _Page1State extends State<Page1> {
                       ),
                     ],
                   ),
+                  */
                   const SizedBox(height: 40),
                   InkWell(
                     onTap: () {
-                      Get.to(() => const Page2());
+                      // Get.to(() => const Page2());
+
+                      tap(Offset(247.1, 606.0));
                     },
                     child: Container(
                       height: 0.06.sh,
@@ -391,7 +470,7 @@ class _Page1State extends State<Page1> {
                           child: SafeArea(
                             child: SizedBox(
                               height: 0.3.sh,
-                              width: 0.3.sw,
+                              width: 0.35.sw,
                               child: Transform.scale(
                                 scale: 1,
                                 child: CameraPreview(
@@ -407,7 +486,7 @@ class _Page1State extends State<Page1> {
                 ],
               ),
               // for (int i = 0; i < irisController.points.length; i++)
-              /*  if (eye != null)
+              if (eye != null)
                 Positioned(
                   right: eye!['y'].toDouble() * 1.sw,
                   bottom: eye!['x'].toDouble() * 1.sh,
@@ -415,12 +494,26 @@ class _Page1State extends State<Page1> {
                     height: 15,
                     width: 15,
                     decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                ),
+
+              if (click)
+                Positioned(
+                  right: 0.5.sw,
+                  bottom: 0.9.sh,
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(100),
                     ),
                   ),
                 ),
-              if (left != null)
+              /*  if (left != null)
                 Positioned(
                   right: left!['y'].toDouble() * 1.sw,
                   bottom: left!['x'].toDouble() * 1.sh,
@@ -475,7 +568,7 @@ class _Page1State extends State<Page1> {
  */
               // if (location != null)
               // for (int i = 0; i < location!['sublist'].length; i++)
-              Positioned(
+              /*  Positioned(
                 left: (leftPos / 100) * 1.sw,
                 top: (topPos / 100) * 1.sh,
                 child: Container(
@@ -488,7 +581,7 @@ class _Page1State extends State<Page1> {
                 ),
               ),
 
-              /* Positioned(
+               Positioned(
               right: irisController.faceAtMoment.x.toDouble(),
               top: irisController.faceAtMoment.y.toDouble(),
               child: Container(
@@ -506,4 +599,27 @@ class _Page1State extends State<Page1> {
       ),
     );
   }
+}
+
+void tap(Offset pos) {
+  print('POSCLick: ${pos}');
+  // final result = HitTestResult();
+  // WidgetsBinding.instance.hitTest(result, pos);
+
+  GestureBinding.instance.handlePointerEvent(
+    PointerDownEvent(position: pos),
+  );
+  // final result = HitTestResult();
+  // WidgetsBinding.instance.hitTest(result, pos);
+  // // print('RESULT: ${result}');
+  // result.path.forEach((element) {
+  //   element.target.handleEvent(
+  //     PointerDownEvent(position: pos, kind: PointerDeviceKind.touch),
+  //     element,
+  //   );
+  //   element.target.handleEvent(
+  //     PointerUpEvent(position: pos, kind: PointerDeviceKind.touch),
+  //     element,
+  //   );
+  // });
 }

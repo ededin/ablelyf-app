@@ -82,7 +82,7 @@ configurations.all {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-//    implementation 'com.google.mediapipe:tasks-vision:0.20230731'
-//    implementation("androidx.camera:camera-core:1.1.0")
+    implementation 'com.google.mediapipe:tasks-vision:0.20230731'
+    implementation("androidx.camera:camera-core:1.1.0")
 
 }

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import '../../../../../../ablelyf.dart';
@@ -12,7 +13,7 @@ class IrisController extends GetxController {
   int _cameraIndex = -1;
 
   bool _isDetecting = false;
-  // List<Face> faces = [];
+  List<Face> faces = [];
   List<Point<int>> points = [];
 
   Point faceAtMoment = const Point(0, 0);
@@ -116,7 +117,7 @@ class IrisController extends GetxController {
     DeviceOrientation.landscapeRight: 270,
   };
 
-  /* InputImage? */ _inputImageFromCameraImage(CameraImage image) {
+  InputImage? _inputImageFromCameraImage(CameraImage image) {
     if (cameraController == null) return null;
 
     // get image rotation
@@ -127,7 +128,7 @@ class IrisController extends GetxController {
     final sensorOrientation = camera.sensorOrientation;
     // print(
     //     'lensDirection: ${camera.lensDirection}, sensorOrientation: $sensorOrientation, ${_controller?.value.deviceOrientation} ${_controller?.value.lockedCaptureOrientation} ${_controller?.value.isCaptureOrientationLocked}');
-    /*  InputImageRotation? rotation;
+    InputImageRotation? rotation;
     if (Platform.isIOS) {
       rotation = InputImageRotationValue.fromRawValue(sensorOrientation);
     } else if (Platform.isAndroid) {
@@ -172,7 +173,7 @@ class IrisController extends GetxController {
         format: format, // used only in iOS
         bytesPerRow: plane.bytesPerRow, // used only in iOS
       ),
-    ); */
+    );
   }
 
   Future<void> processImage(CameraImage inputImage) async {
